@@ -1,0 +1,24 @@
+//config
+@import "./config/_colors.scss";
+@import "./config/_fonts.scss";
+@import "./config/_reset.scss";
+
+//globalStyles
+
+body {
+  margin-top: 90px;
+  width: 100%;
+  @media (min-width: 768px) {
+    width: 630px;
+  }
+}
+
+div,
+span,
+p,
+a,
+textarea,
+button,
+input {
+  font-family: "Pretendard-Regular";
+}
