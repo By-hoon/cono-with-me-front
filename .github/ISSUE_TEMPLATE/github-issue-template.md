@@ -2,7 +2,7 @@
 name: github issue template
 about: github issue 공통 템플릿
 title: ''
-labels: documentation
+labels: ''
 assignees: ''
 
 ---
