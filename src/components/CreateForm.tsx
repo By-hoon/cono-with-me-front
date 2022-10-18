@@ -29,7 +29,14 @@ export const CreateWithForm = () => {
   };
   const selectPreferredGenre = (option: string) => {
     let newPreferredGenre = JSON.parse(JSON.stringify(preferredGenre));
-    newPreferredGenre[option] = !newPreferredGenre[option];
+    if (option !== "모든 장르") {
+      newPreferredGenre["모든 장르"] = false;
+      newPreferredGenre[option] = !newPreferredGenre[option];
+      if (!newPreferredGenre[option]) {
+        if (!Object.keys(newPreferredGenre).filter((key) => newPreferredGenre[key]).length)
+          newPreferredGenre["모든 장르"] = true;
+      }
+    } else if (!newPreferredGenre["모든 장르"]) newPreferredGenre = PreferredGenre;
     setPreferredGenre(newPreferredGenre);
   };
   const onSubmit = () => {
