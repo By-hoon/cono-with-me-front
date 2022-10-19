@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 
@@ -19,21 +19,21 @@ export const CreateWithForm = () => {
   const startTimeFocus = useRef<HTMLInputElement>(null);
   const endTimeFocus = useRef<HTMLInputElement>(null);
 
-  const changeTitle = (e: any) => {
+  const changeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
-  };
-  const changeContent = (e: any) => {
+  }, []);
+  const changeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
-  };
-  const changeStartTime = (e: any) => {
+  }, []);
+  const changeStartTime = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setStartTime(e.target.value);
-  };
-  const changeEndTime = (e: any) => {
+  }, []);
+  const changeEndTime = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setEndTime(e.target.value);
-  };
-  const changePlace = (e: any) => {
+  }, []);
+  const changePlace = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPlace(e.target.value);
-  };
+  }, []);
   const changeHeadcount = (option: number) => {
     setHeadcount(option);
   };
