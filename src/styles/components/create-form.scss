@@ -1,0 +1,24 @@
+.create-with__container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.input-title__container {
+  width: 100px;
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.content-input__container {
+  textarea {
+    resize: none;
+  }
+}
+
+.create-option__container {
+  flex-wrap: wrap;
+}
+
+.create-option__button--clicked {
+  color: blue;
+}

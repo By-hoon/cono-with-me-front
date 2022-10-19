@@ -1,12 +1,14 @@
+//components
+@import "./components/create-form.scss";
+
 //config
 @import "./config/_colors.scss";
 @import "./config/_fonts.scss";
 @import "./config/_reset.scss";
 
 //globalStyles
-
 body {
-  margin-top: 90px;
+  margin: 90px auto 0 auto;
   width: 100%;
   @media (min-width: 768px) {
     width: 630px;
@@ -21,4 +23,9 @@ textarea,
 button,
 input {
   font-family: "Pretendard-Regular";
+}
+
+.flex {
+  width: 100%;
+  display: flex;
 }
