@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 
@@ -12,8 +12,11 @@ export const CreateWithForm = () => {
   const [place, setPlace] = useState("");
   const [headcount, setHeadcount] = useState(1);
   const [preferredGenre, setPreferredGenre] = useState(PreferredGenre);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const startTimeFocus = useRef<HTMLInputElement>(null);
+  const endTimeFocus = useRef<HTMLInputElement>(null);
 
   const changeStartTime = (e: any) => {
     setStartTime(e.target.value);
@@ -39,21 +42,53 @@ export const CreateWithForm = () => {
     } else if (!newPreferredGenre["모든 장르"]) newPreferredGenre = PreferredGenre;
     setPreferredGenre(newPreferredGenre);
   };
-  const onSubmit = () => {
-    //axios 이용한 post
-    navigate("/");
+  const convertTime = (time: string) => {
+    const timeSplit = time.split(":");
+    const hour = Number(timeSplit[0]);
+    const minute = Number(timeSplit[1]);
+    return hour * 60 + minute;
   };
+  const isValidTime = () => {
+    const currentTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(11, 16);
+    const convertCurrentTime = convertTime(currentTime);
+    const convertStartTime = convertTime(startTime);
+    const convertEndTime = convertTime(endTime);
+    if (convertCurrentTime > convertStartTime) {
+      startTimeFocus.current?.focus();
+      setError(`시작 시간은 현재 시간보다 작을 수 없습니다. 현재시간: ${currentTime}`);
+      return false;
+    } else if (convertStartTime >= convertEndTime) {
+      endTimeFocus.current?.focus();
+      setError(`종료 시간은 시작 시간보다 작을 수 없습니다.`);
+      return false;
+    } else return true;
+  };
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    if (isValidTime()) {
+      //axios 이용한 post
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    if (error !== "") {
+      alert(error);
+    }
+  }, [error]);
   return (
     <div className="create-with__container">
       <form onSubmit={onSubmit}>
         <div className="time-input__container">
           <div className="flex">
             <div className="input-title__container">시작 시간</div>
-            <input type="time" value={startTime} onChange={changeStartTime} required />
+            <input type="time" value={startTime} onChange={changeStartTime} required ref={startTimeFocus} />
           </div>
           <div className="flex">
             <div className="input-title__container">종료 시간</div>
-            <input type="time" value={endTime} onChange={changeEndTime} required />
+            <input type="time" value={endTime} onChange={changeEndTime} required ref={endTimeFocus} />
           </div>
         </div>
         <div className="place-input__container">
