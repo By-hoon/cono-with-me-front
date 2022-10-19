@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 
 export const CreateWithForm = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [startTime, setStartTime] = useState(
     new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(11, 16)
   );
@@ -17,6 +19,12 @@ export const CreateWithForm = () => {
   const startTimeFocus = useRef<HTMLInputElement>(null);
   const endTimeFocus = useRef<HTMLInputElement>(null);
 
+  const changeTitle = (e: any) => {
+    setTitle(e.target.value);
+  };
+  const changeContent = (e: any) => {
+    setContent(e.target.value);
+  };
   const changeStartTime = (e: any) => {
     setStartTime(e.target.value);
   };
@@ -75,6 +83,24 @@ export const CreateWithForm = () => {
   return (
     <div className="create-with__container">
       <form onSubmit={onSubmit}>
+        <div className="title-input__container">
+          <div className="flex">
+            <div className="input-title__container">제목</div>
+            <input
+              type="text"
+              value={title}
+              placeholder="제목을 입력해 주세요."
+              onChange={changeTitle}
+              required
+            />
+          </div>
+        </div>
+        <div className="content-input__container">
+          <div className="flex">
+            <div className="input-title__container">내용</div>
+            <textarea placeholder="내용을 입력해 주세요." value={content} onChange={changeContent} required />
+          </div>
+        </div>
         <div className="time-input__container">
           <div className="flex">
             <div className="input-title__container">시작 시간</div>
@@ -88,7 +114,13 @@ export const CreateWithForm = () => {
         <div className="place-input__container">
           <div className="flex">
             <div className="input-title__container">장소</div>
-            <input type="text" value={place} onChange={changePlace} required />
+            <input
+              type="text"
+              value={place}
+              placeholder="장소를 입력해 주세요."
+              onChange={changePlace}
+              required
+            />
           </div>
         </div>
         <div className="headcount-input__container">
