@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 
@@ -12,7 +12,6 @@ export const CreateWithForm = () => {
   const [place, setPlace] = useState("");
   const [headcount, setHeadcount] = useState(1);
   const [preferredGenre, setPreferredGenre] = useState(PreferredGenre);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const startTimeFocus = useRef<HTMLInputElement>(null);
@@ -57,11 +56,11 @@ export const CreateWithForm = () => {
     const convertEndTime = convertTime(endTime);
     if (convertCurrentTime > convertStartTime) {
       startTimeFocus.current?.focus();
-      setError(`시작 시간은 현재 시간보다 작을 수 없습니다. 현재시간: ${currentTime}`);
+      alert(`시작 시간은 현재 시간보다 작을 수 없습니다. 현재시간: ${currentTime}`);
       return false;
     } else if (convertStartTime >= convertEndTime) {
       endTimeFocus.current?.focus();
-      setError(`종료 시간은 시작 시간보다 작을 수 없습니다.`);
+      alert(`종료 시간은 시작 시간보다 작을 수 없습니다.`);
       return false;
     } else return true;
   };
@@ -73,11 +72,6 @@ export const CreateWithForm = () => {
     }
   };
 
-  useEffect(() => {
-    if (error !== "") {
-      alert(error);
-    }
-  }, [error]);
   return (
     <div className="create-with__container">
       <form onSubmit={onSubmit}>
