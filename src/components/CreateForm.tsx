@@ -145,7 +145,7 @@ export const CreateWithForm = () => {
         <div className="preferred-genre-input__container">
           <div className="flex">
             <div className="input-title__container">선호 장르</div>
-            <div className="create-option__container flex-wrap">
+            <div className="create-option__container">
               {Object.keys(PreferredGenre).map((preferredGenreOption) => (
                 <button
                   key={preferredGenreOption}
