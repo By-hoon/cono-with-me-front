@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 
 export const CreateWithForm = () => {
@@ -179,6 +180,10 @@ export const CreateLiveForm = () => {
     //axios 이용한 post
     navigate("/");
   };
+  const goBackStep = () => {
+    if (step === "song") setStep("video");
+    else if (step === "content") setStep("song");
+  };
   const stepRender = () => {
     switch (step) {
       case "video": {
@@ -195,6 +200,13 @@ export const CreateLiveForm = () => {
   };
   return (
     <div className="create-with__container">
+      {step !== "video" ? (
+        <div className="back-button__container">
+          <button onClick={goBackStep}>
+            <Icon icon="bx:arrow-back" />
+          </button>
+        </div>
+      ) : null}
       <form onSubmit={createLive}>{stepRender()}</form>
     </div>
   );
