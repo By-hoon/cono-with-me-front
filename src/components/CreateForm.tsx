@@ -72,7 +72,7 @@ export const CreateWithForm = () => {
       return false;
     } else return true;
   };
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isValidTime()) {
       //axios 이용한 post
@@ -167,6 +167,35 @@ export const CreateWithForm = () => {
           <input type="submit" value="등록하기" />
         </div>
       </form>
+    </div>
+  );
+};
+
+export const CreateLiveForm = () => {
+  const [step, setStep] = useState("video");
+  const navigate = useNavigate();
+  const createLive = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //axios 이용한 post
+    navigate("/");
+  };
+  const stepRender = () => {
+    switch (step) {
+      case "video": {
+        return <>{/* 비디오 업로드 컴포넌트 */}</>;
+      }
+      case "song": {
+        return <>{/* 노래 선택 컴포넌트 */}</>;
+      }
+      case "content": {
+        return <>{/* 내용 입력 컴포넌트 */}</>;
+      }
+    }
+    return null;
+  };
+  return (
+    <div className="create-with__container">
+      <form onSubmit={createLive}>{stepRender()}</form>
     </div>
   );
 };
