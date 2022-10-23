@@ -1,5 +1,7 @@
+import Router from "./components/Router";
+
 const App = () => {
-  return <div>cono-with-me</div>;
+  return <Router />;
 };
 
 export default App;
