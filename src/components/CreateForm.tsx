@@ -176,7 +176,17 @@ export const CreateWithForm = () => {
 export const CreateLiveForm = () => {
   const [step, setStep] = useState("video");
   const [videoFile, setVideoFile] = useState({});
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
   const navigate = useNavigate();
+
+  const changeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  }, []);
+  const changeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  }, []);
   const createLive = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //axios 이용한 post
@@ -195,7 +205,33 @@ export const CreateLiveForm = () => {
         return <>{/* 노래 선택 컴포넌트 */}</>;
       }
       case "content": {
-        return <>{/* 내용 입력 컴포넌트 */}</>;
+        return (
+          <div className="live-content-input__container">
+            <div className="title-input__container">
+              <div className="flex">
+                <div className="input-title__container">제목</div>
+                <input
+                  type="text"
+                  value={title}
+                  placeholder="제목을 입력해 주세요."
+                  onChange={changeTitle}
+                  required
+                />
+              </div>
+            </div>
+            <div className="content-input__container">
+              <div className="flex">
+                <div className="input-title__container">내용</div>
+                <textarea
+                  placeholder="내용을 입력해 주세요."
+                  value={content}
+                  onChange={changeContent}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        );
       }
     }
     return null;
