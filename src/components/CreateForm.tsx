@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
+import SearchSong from "./SearchSong";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -187,8 +188,7 @@ export const CreateLiveForm = () => {
   const changeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   }, []);
-  const createLive = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const createLive = () => {
     //axios 이용한 post
     navigate("/");
   };
@@ -202,7 +202,7 @@ export const CreateLiveForm = () => {
         return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} />;
       }
       case "song": {
-        return <>{/* 노래 선택 컴포넌트 */}</>;
+        return <SearchSong />;
       }
       case "content": {
         return (
@@ -245,7 +245,7 @@ export const CreateLiveForm = () => {
           </button>
         </div>
       ) : null}
-      <form onSubmit={createLive}>{stepRender()}</form>
+      <div className="step__container">{stepRender()}</div>
     </div>
   );
 };
