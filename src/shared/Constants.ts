@@ -14,6 +14,10 @@ export const PreferredGenre: { [key: string]: boolean } = {
   그외: false,
 };
 
+export const maniadbBaseUrl = (keyword: string, sr: "artist" | "album" | "song") => {
+  return `/maniadb/${keyword}/?sr=${sr}&display=10&key=example&v=0.5`;
+};
+
 export const xmlToJson = (xml: any) => {
   let obj = {} as any;
 

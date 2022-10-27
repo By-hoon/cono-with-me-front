@@ -1,11 +1,23 @@
+import axios from "axios";
 import { useCallback, useState } from "react";
+import { maniadbBaseUrl, xmlToJson } from "../shared/Constants";
 
 const SearchSong = () => {
   const [keyword, setKeyword] = useState("");
   const [songs, setSongs] = useState([]);
 
+  const getSongs = async () => {
+    const reqURL = maniadbBaseUrl(keyword, "song");
+    await axios(reqURL).then((response) => {
+      const dataSet = response.data;
+      let XmlNode = new DOMParser().parseFromString(dataSet, "text/xml");
+      console.log(xmlToJson(XmlNode));
+    });
+  };
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    getSongs();
   };
 
   const onChangeKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
