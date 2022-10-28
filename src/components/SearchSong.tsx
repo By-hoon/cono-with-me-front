@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { maniadbBaseUrl, xmlToJson } from "../shared/Constants";
+import Song from "./Song";
 
-interface SongProps {
+export interface SongProps {
   id: string;
   title: string;
   artist: string;
@@ -52,7 +53,17 @@ const SearchSong = () => {
           onChange={onChangeKeyword}
         />
       </form>
-      {<>{songs.length ? console.log(songs) : null}</>}
+      <div className="songs__container">
+        {songs.map((song) => (
+          <Song
+            key={song.id}
+            id={song.id}
+            title={song.title}
+            artist={song.artist}
+            albumImage={song.albumImage}
+          />
+        ))}
+      </div>
     </div>
   );
 };
