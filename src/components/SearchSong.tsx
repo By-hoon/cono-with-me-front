@@ -10,7 +10,12 @@ export interface SongProps {
   albumImage: string;
 }
 
-const SearchSong = () => {
+export interface SearchSongProps {
+  selectedSong: SongProps | undefined;
+  setSelectedSong: React.Dispatch<React.SetStateAction<SongProps | undefined>>;
+}
+
+const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   const [keyword, setKeyword] = useState("");
   const [songs, setSongs] = useState<Array<SongProps>>([]);
 
@@ -61,6 +66,8 @@ const SearchSong = () => {
             title={song.title}
             artist={song.artist}
             albumImage={song.albumImage}
+            selectedSong={selectedSong}
+            setSelectedSong={setSelectedSong}
           />
         ))}
       </div>

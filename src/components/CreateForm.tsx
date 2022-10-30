@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
-import SearchSong from "./SearchSong";
+import SearchSong, { SongProps } from "./SearchSong";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -177,6 +177,7 @@ export const CreateWithForm = () => {
 export const CreateLiveForm = () => {
   const [step, setStep] = useState("video");
   const [videoFile, setVideoFile] = useState({});
+  const [selectedSong, setSelectedSong] = useState<SongProps>();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -202,7 +203,7 @@ export const CreateLiveForm = () => {
         return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} />;
       }
       case "song": {
-        return <SearchSong />;
+        return <SearchSong selectedSong={selectedSong} setSelectedSong={setSelectedSong} />;
       }
       case "content": {
         return (
