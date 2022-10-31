@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { maniadbBaseUrl, xmlToJson } from "../shared/Constants";
@@ -18,14 +19,18 @@ export interface SearchSongProps {
 const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   const [keyword, setKeyword] = useState("");
   const [songs, setSongs] = useState<Array<SongProps>>([]);
+  const [loading, setLoading] = useState(false);
 
   const getSongs = async () => {
     const reqURL = maniadbBaseUrl(keyword, "song");
-    await axios(reqURL).then((response) => {
-      const dataSet = response.data;
-      let XmlNode = new DOMParser().parseFromString(dataSet, "text/xml");
-      filterResponse(xmlToJson(XmlNode).rss.channel.item);
-    });
+    await axios(reqURL)
+      .then((response) => {
+        const dataSet = response.data;
+        let XmlNode = new DOMParser().parseFromString(dataSet, "text/xml");
+        filterResponse(xmlToJson(XmlNode).rss.channel.item);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
   };
   const filterResponse = (response: Array<any>) => {
     const newResponse: Array<SongProps> = [];
@@ -41,6 +46,7 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   };
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     getSongs();
   };
 
@@ -58,6 +64,11 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
           onChange={onChangeKeyword}
         />
       </form>
+      {loading ? (
+        <div className="songs-loading__container">
+          <Icon icon="eos-icons:loading" />
+        </div>
+      ) : null}
       <div className="songs__container">
         {songs.map((song) => (
           <Song
