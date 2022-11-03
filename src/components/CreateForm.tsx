@@ -182,6 +182,9 @@ export const CreateLiveForm = () => {
   const [content, setContent] = useState("");
   const [showNext, setShowNext] = useState(false);
 
+  const titleFocus = useRef<HTMLInputElement>(null);
+  const contentFocus = useRef<HTMLTextAreaElement>(null);
+
   const navigate = useNavigate();
 
   const changeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -191,8 +194,13 @@ export const CreateLiveForm = () => {
     setContent(e.target.value);
   }, []);
   const createLive = () => {
-    //axios 이용한 post
-    navigate("/");
+    if (title && content) {
+      //axios 이용한 post
+      console.log(videoFile, selectedSong, title, content);
+      navigate("/");
+    }
+    if (!content) contentFocus.current?.focus();
+    if (!title) titleFocus.current?.focus();
   };
   const goBackStep = () => {
     if (step === "song") setStep("video");
@@ -228,6 +236,7 @@ export const CreateLiveForm = () => {
                   value={title}
                   placeholder="제목을 입력해 주세요."
                   onChange={changeTitle}
+                  ref={titleFocus}
                   required
                 />
               </div>
@@ -239,6 +248,7 @@ export const CreateLiveForm = () => {
                   placeholder="내용을 입력해 주세요."
                   value={content}
                   onChange={changeContent}
+                  ref={contentFocus}
                   required
                 />
               </div>
@@ -265,7 +275,13 @@ export const CreateLiveForm = () => {
             다음
           </button>
         </div>
-      ) : null}
+      ) : (
+        <div className="submit-button__container">
+          <button className="submit__button" onClick={createLive}>
+            라이브 생성
+          </button>
+        </div>
+      )}
     </div>
   );
 };
