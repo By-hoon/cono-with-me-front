@@ -3,14 +3,15 @@ import { useCallback, useRef, useState } from "react";
 interface uploadVideoProps {
   videoFile: {};
   setVideoFile: React.Dispatch<React.SetStateAction<{}>>;
+  setShowNext: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UploadVideo = ({ videoFile, setVideoFile }: uploadVideoProps) => {
+const UploadVideo = ({ videoFile, setVideoFile, setShowNext }: uploadVideoProps) => {
   const [videoUrl, setVideoUrl] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
-
   const encodeFile = (fileBlob: Blob) => {
     setVideoUrl(URL.createObjectURL(fileBlob));
+    setShowNext(true);
   };
   const onChangeVideo = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {

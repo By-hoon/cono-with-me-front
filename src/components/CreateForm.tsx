@@ -180,6 +180,7 @@ export const CreateLiveForm = () => {
   const [selectedSong, setSelectedSong] = useState<SongProps>();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [showNext, setShowNext] = useState(false);
 
   const navigate = useNavigate();
 
@@ -197,13 +198,24 @@ export const CreateLiveForm = () => {
     if (step === "song") setStep("video");
     else if (step === "content") setStep("song");
   };
+  const goNextStep = () => {
+    if (step === "video") setStep("song");
+    else if (step === "song") setStep("content");
+    setShowNext(false);
+  };
   const stepRender = () => {
     switch (step) {
       case "video": {
-        return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} />;
+        return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} setShowNext={setShowNext} />;
       }
       case "song": {
-        return <SearchSong selectedSong={selectedSong} setSelectedSong={setSelectedSong} />;
+        return (
+          <SearchSong
+            selectedSong={selectedSong}
+            setSelectedSong={setSelectedSong}
+            setShowNext={setShowNext}
+          />
+        );
       }
       case "content": {
         return (
@@ -247,6 +259,13 @@ export const CreateLiveForm = () => {
         </div>
       ) : null}
       <div className="step__container">{stepRender()}</div>
+      {step !== "content" ? (
+        <div className={`"next-button__container" ${showNext ? null : "display-none"}`}>
+          <button className="next__button" onClick={goNextStep}>
+            다음
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };
