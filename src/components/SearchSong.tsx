@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { maniadbBaseUrl, xmlToJson } from "../shared/Constants";
 import Song from "./Song";
 
@@ -50,9 +50,15 @@ const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongPr
     setLoading(true);
     getSongs();
   };
-
   const onChangeKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
+  }, []);
+
+  useEffect(() => {
+    if (selectedSong) {
+      setSongs([selectedSong]);
+      setShowNext(true);
+    }
   }, []);
   return (
     <div className="search-song__container">

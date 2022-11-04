@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface uploadVideoProps {
   videoFile: {};
@@ -28,6 +28,16 @@ const UploadVideo = ({ videoFile, setVideoFile, setShowNext }: uploadVideoProps)
     }
     inputRef.current.click();
   }, []);
+
+  useEffect(() => {
+    let isHaveVideo = false;
+    for (let attribute in videoFile) {
+      isHaveVideo = true;
+      break;
+    }
+    if (isHaveVideo) encodeFile(videoFile as Blob);
+  }, []);
+
   return (
     <div className="video-upload__container">
       <div className="video-input__container">
