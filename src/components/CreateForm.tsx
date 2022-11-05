@@ -1,6 +1,9 @@
 import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import { headcounts, PreferredGenre } from "../shared/Constants";
+import UploadVideo from "./UploadVideo";
+import SearchSong, { SongProps } from "./SearchSong";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -72,7 +75,7 @@ export const CreateWithForm = () => {
       return false;
     } else return true;
   };
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isValidTime()) {
       //axios 이용한 post
@@ -167,6 +170,118 @@ export const CreateWithForm = () => {
           <input type="submit" value="등록하기" />
         </div>
       </form>
+    </div>
+  );
+};
+
+export const CreateLiveForm = () => {
+  const [step, setStep] = useState("video");
+  const [videoFile, setVideoFile] = useState({});
+  const [selectedSong, setSelectedSong] = useState<SongProps>();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [showNext, setShowNext] = useState(false);
+
+  const titleFocus = useRef<HTMLInputElement>(null);
+  const contentFocus = useRef<HTMLTextAreaElement>(null);
+
+  const navigate = useNavigate();
+
+  const changeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  }, []);
+  const changeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  }, []);
+  const createLive = () => {
+    if (title && content) {
+      //axios 이용한 post
+      console.log(videoFile, selectedSong, title, content);
+      navigate("/");
+    }
+    if (!content) contentFocus.current?.focus();
+    if (!title) titleFocus.current?.focus();
+  };
+  const goBackStep = () => {
+    if (step === "song") setStep("video");
+    else if (step === "content") setStep("song");
+  };
+  const goNextStep = () => {
+    if (step === "video") setStep("song");
+    else if (step === "song") setStep("content");
+    setShowNext(false);
+  };
+  const stepRender = () => {
+    switch (step) {
+      case "video": {
+        return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} setShowNext={setShowNext} />;
+      }
+      case "song": {
+        return (
+          <SearchSong
+            selectedSong={selectedSong}
+            setSelectedSong={setSelectedSong}
+            setShowNext={setShowNext}
+          />
+        );
+      }
+      case "content": {
+        return (
+          <div className="live-content-input__container">
+            <div className="title-input__container">
+              <div className="flex">
+                <div className="input-title__container">제목</div>
+                <input
+                  type="text"
+                  value={title}
+                  placeholder="제목을 입력해 주세요."
+                  onChange={changeTitle}
+                  ref={titleFocus}
+                  required
+                />
+              </div>
+            </div>
+            <div className="content-input__container">
+              <div className="flex">
+                <div className="input-title__container">내용</div>
+                <textarea
+                  placeholder="내용을 입력해 주세요."
+                  value={content}
+                  onChange={changeContent}
+                  ref={contentFocus}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        );
+      }
+    }
+    return null;
+  };
+  return (
+    <div className="create-with__container">
+      {step !== "video" ? (
+        <div className="back-button__container">
+          <button onClick={goBackStep}>
+            <Icon icon="bx:arrow-back" />
+          </button>
+        </div>
+      ) : null}
+      <div className="step__container">{stepRender()}</div>
+      {step !== "content" ? (
+        <div className={`"next-button__container" ${showNext ? null : "display-none"}`}>
+          <button className="next__button" onClick={goNextStep}>
+            다음
+          </button>
+        </div>
+      ) : (
+        <div className="submit-button__container">
+          <button className="submit__button" onClick={createLive}>
+            라이브 생성
+          </button>
+        </div>
+      )}
     </div>
   );
 };
