@@ -14,10 +14,9 @@ export interface SongProps {
 export interface SearchSongProps {
   selectedSong: SongProps | undefined;
   setSelectedSong: React.Dispatch<React.SetStateAction<SongProps | undefined>>;
-  setShowNext: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongProps) => {
+const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   const [keyword, setKeyword] = useState("");
   const [songs, setSongs] = useState<Array<SongProps>>([]);
   const [loading, setLoading] = useState(false);
@@ -55,10 +54,7 @@ const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongPr
   }, []);
 
   useEffect(() => {
-    if (selectedSong) {
-      setSongs([selectedSong]);
-      setShowNext(true);
-    }
+    if (selectedSong) setSongs([selectedSong]);
   }, []);
   return (
     <div className="search-song__container">
@@ -86,7 +82,6 @@ const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongPr
             albumImage={song.albumImage}
             selectedSong={selectedSong}
             setSelectedSong={setSelectedSong}
-            setShowNext={setShowNext}
           />
         ))}
       </div>
