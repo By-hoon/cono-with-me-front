@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface uploadVideoProps {
-  videoFile: {};
+  videoFile: any | { [key: string]: string };
   setVideoFile: React.Dispatch<React.SetStateAction<{}>>;
 }
 
@@ -28,11 +28,13 @@ const UploadVideo = ({ videoFile, setVideoFile }: uploadVideoProps) => {
   }, []);
 
   useEffect(() => {
+    console.log(videoFile);
     for (let attribute in videoFile) {
-      encodeFile(videoFile as Blob);
+      if (attribute === "url") setVideoUrl(videoFile["url"]); // 수정 구현을 위한 임시 코드 api 연동 시 삭제
+      else encodeFile(videoFile as Blob);
       break;
     }
-  }, []);
+  }, [videoFile]);
 
   return (
     <div className="video-upload__container">

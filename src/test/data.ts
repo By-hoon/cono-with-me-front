@@ -1,8 +1,9 @@
 export const LiveData = {
   id: "live1",
   author: "hoon",
-  videoUrl:
-    "https://firebasestorage.googleapis.com/v0/b/byhoon-bdf04.appspot.com/o/KakaoTalk_20221024_231102528.mp4?alt=media&token=9a848311-95ca-4e65-ae4a-e0cdd6b2ed44",
+  video: {
+    url: "https://firebasestorage.googleapis.com/v0/b/byhoon-bdf04.appspot.com/o/KakaoTalk_20221024_231102528.mp4?alt=media&token=9a848311-95ca-4e65-ae4a-e0cdd6b2ed44",
+  },
   song: {
     id: "song1",
     title: "hoon송",

@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LiveData } from "../test/data";
+import UploadVideo from "./UploadVideo";
 
 export const EditLiveForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
+  const [videoFile, setVideoFile] = useState({});
   const titleFocus = useRef<HTMLInputElement>(null);
   const contentFocus = useRef<HTMLTextAreaElement>(null);
 
@@ -28,6 +29,7 @@ export const EditLiveForm = () => {
   };
 
   useEffect(() => {
+    setVideoFile(LiveData.video);
     setTitle(LiveData.title);
     setContent(LiveData.content);
   }, []);
@@ -38,7 +40,7 @@ export const EditLiveForm = () => {
         <div className="edit-header">
           <span className="edit__span">동영상 수정</span>
         </div>
-        {/* 동영상 업로드 컴포넌트 */}
+        <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} />
       </div>
       <div className="edit-song__container">
         <div className="edit-header">
