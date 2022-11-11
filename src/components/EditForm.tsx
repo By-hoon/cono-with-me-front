@@ -2,11 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LiveData } from "../test/data";
 import UploadVideo from "./UploadVideo";
+import SearchSong, { SongProps } from "./SearchSong";
 
 export const EditLiveForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [videoFile, setVideoFile] = useState({});
+  const [selectedSong, setSelectedSong] = useState<SongProps>(LiveData.song);
   const titleFocus = useRef<HTMLInputElement>(null);
   const contentFocus = useRef<HTMLTextAreaElement>(null);
 
@@ -32,6 +34,7 @@ export const EditLiveForm = () => {
     setVideoFile(LiveData.video);
     setTitle(LiveData.title);
     setContent(LiveData.content);
+    setSelectedSong(LiveData.song);
   }, []);
 
   return (
@@ -46,7 +49,7 @@ export const EditLiveForm = () => {
         <div className="edit-header">
           <span className="edit__span">노래 수정</span>
         </div>
-        {/* 노래 검색 컴포넌트 */}
+        <SearchSong selectedSong={selectedSong} setSelectedSong={setSelectedSong} />
       </div>
       <div className="edit-content__container">
         <div className="edit-header">

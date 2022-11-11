@@ -177,7 +177,12 @@ export const CreateWithForm = () => {
 export const CreateLiveForm = () => {
   const [step, setStep] = useState("video");
   const [videoFile, setVideoFile] = useState({});
-  const [selectedSong, setSelectedSong] = useState<SongProps>();
+  const [selectedSong, setSelectedSong] = useState<SongProps>({
+    id: "",
+    title: "",
+    artist: "",
+    albumImage: "",
+  });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [showNext, setShowNext] = useState(false);
@@ -220,7 +225,7 @@ export const CreateLiveForm = () => {
       }
     }
     if (step === "song") {
-      setShowNext(selectedSong ? true : false);
+      setShowNext(selectedSong["id"] ? true : false);
     }
   }, [step, videoFile, selectedSong]);
 

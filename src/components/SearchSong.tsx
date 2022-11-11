@@ -12,8 +12,8 @@ export interface SongProps {
 }
 
 export interface SearchSongProps {
-  selectedSong: SongProps | undefined;
-  setSelectedSong: React.Dispatch<React.SetStateAction<SongProps | undefined>>;
+  selectedSong: SongProps;
+  setSelectedSong: React.Dispatch<React.SetStateAction<SongProps>>;
 }
 
 const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
@@ -54,7 +54,7 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   }, []);
 
   useEffect(() => {
-    if (selectedSong) setSongs([selectedSong]);
+    if (selectedSong["id"]) setSongs([selectedSong]);
   }, []);
   return (
     <div className="search-song__container">

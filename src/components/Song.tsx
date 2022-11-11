@@ -9,7 +9,12 @@ const Song = ({ id, title, artist, albumImage, selectedSong, setSelectedSong }: 
 
   const selectSong = () => {
     if (selectedSong?.id === id) {
-      setSelectedSong(undefined);
+      setSelectedSong({
+        id: "",
+        title: "",
+        artist: "",
+        albumImage: "",
+      });
     } else {
       setSelectedSong({
         id,
