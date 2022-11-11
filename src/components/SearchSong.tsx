@@ -53,11 +53,21 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
     setKeyword(e.target.value);
   }, []);
 
-  useEffect(() => {
-    if (selectedSong["id"]) setSongs([selectedSong]);
-  }, []);
   return (
     <div className="search-song__container">
+      {selectedSong["id"] ? (
+        <div className="selected-song__container">
+          <div className="song-image__container">
+            <img src={selectedSong.albumImage} alt={selectedSong.title} className="song__image" />
+          </div>
+          <div className="song-title__container">
+            <span className="song-title__span">{selectedSong.title}</span>
+          </div>
+          <div className="song-artist__container">
+            <span className="song-artist__span">{selectedSong.artist}</span>
+          </div>
+        </div>
+      ) : null}
       <form onSubmit={onSubmit}>
         <input
           placeholder="노래 제목을 입력하세요"

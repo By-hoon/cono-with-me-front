@@ -8,7 +8,12 @@ export const EditLiveForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [videoFile, setVideoFile] = useState({});
-  const [selectedSong, setSelectedSong] = useState<SongProps>(LiveData.song);
+  const [selectedSong, setSelectedSong] = useState<SongProps>({
+    id: "",
+    title: "",
+    artist: "",
+    albumImage: "",
+  });
   const titleFocus = useRef<HTMLInputElement>(null);
   const contentFocus = useRef<HTMLTextAreaElement>(null);
 
