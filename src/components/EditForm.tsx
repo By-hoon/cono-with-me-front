@@ -14,6 +14,12 @@ export const EditLiveForm = () => {
     artist: "",
     albumImage: "",
   });
+  const [previousSong, setPreviousSong] = useState<SongProps>({
+    id: "",
+    title: "",
+    artist: "",
+    albumImage: "",
+  });
   const titleFocus = useRef<HTMLInputElement>(null);
   const contentFocus = useRef<HTMLTextAreaElement>(null);
 
@@ -29,10 +35,24 @@ export const EditLiveForm = () => {
   const goPreviousPage = () => {
     navigate(-1);
   };
+  const checkInputValues = () => {
+    if (!content) {
+      contentFocus.current?.focus();
+      return false;
+    }
+    if (!title) {
+      titleFocus.current?.focus();
+      return false;
+    }
+    return true;
+  };
   const editLive = () => {
-    // 수정 api 호출
-    if (!content) contentFocus.current?.focus();
-    if (!title) titleFocus.current?.focus();
+    const song = selectedSong.id ? selectedSong : previousSong;
+    if (checkInputValues()) {
+      //수정 api 호출
+      console.log(videoFile, song, title, content);
+      // navigate("/");
+    }
   };
 
   useEffect(() => {
@@ -40,6 +60,7 @@ export const EditLiveForm = () => {
     setTitle(LiveData.title);
     setContent(LiveData.content);
     setSelectedSong(LiveData.song);
+    setPreviousSong(LiveData.song);
   }, []);
 
   return (
