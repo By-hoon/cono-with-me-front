@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { headcounts, PreferredGenre } from "../shared/Constants";
@@ -177,7 +177,12 @@ export const CreateWithForm = () => {
 export const CreateLiveForm = () => {
   const [step, setStep] = useState("video");
   const [videoFile, setVideoFile] = useState({});
-  const [selectedSong, setSelectedSong] = useState<SongProps>();
+  const [selectedSong, setSelectedSong] = useState<SongProps>({
+    id: "",
+    title: "",
+    artist: "",
+    albumImage: "",
+  });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [showNext, setShowNext] = useState(false);
@@ -211,19 +216,26 @@ export const CreateLiveForm = () => {
     else if (step === "song") setStep("content");
     setShowNext(false);
   };
+
+  useEffect(() => {
+    if (step === "video") {
+      for (let attribute in videoFile) {
+        setShowNext(true);
+        break;
+      }
+    }
+    if (step === "song") {
+      setShowNext(selectedSong["id"] ? true : false);
+    }
+  }, [step, videoFile, selectedSong]);
+
   const stepRender = () => {
     switch (step) {
       case "video": {
-        return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} setShowNext={setShowNext} />;
+        return <UploadVideo videoFile={videoFile} setVideoFile={setVideoFile} />;
       }
       case "song": {
-        return (
-          <SearchSong
-            selectedSong={selectedSong}
-            setSelectedSong={setSelectedSong}
-            setShowNext={setShowNext}
-          />
-        );
+        return <SearchSong selectedSong={selectedSong} setSelectedSong={setSelectedSong} />;
       }
       case "content": {
         return (

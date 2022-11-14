@@ -4,23 +4,18 @@ import { SearchSongProps, SongProps } from "./SearchSong";
 
 interface SongComponentProps extends SongProps, SearchSongProps {}
 
-const Song = ({
-  id,
-  title,
-  artist,
-  albumImage,
-  selectedSong,
-  setSelectedSong,
-  setShowNext,
-}: SongComponentProps) => {
+const Song = ({ id, title, artist, albumImage, selectedSong, setSelectedSong }: SongComponentProps) => {
   const [loading, setLoading] = useState(true);
 
   const selectSong = () => {
     if (selectedSong?.id === id) {
-      setShowNext(false);
-      setSelectedSong(undefined);
+      setSelectedSong({
+        id: "",
+        title: "",
+        artist: "",
+        albumImage: "",
+      });
     } else {
-      setShowNext(true);
       setSelectedSong({
         id,
         title,

@@ -1,17 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface uploadVideoProps {
-  videoFile: {};
+  videoFile: any | { [key: string]: string };
   setVideoFile: React.Dispatch<React.SetStateAction<{}>>;
-  setShowNext: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UploadVideo = ({ videoFile, setVideoFile, setShowNext }: uploadVideoProps) => {
+const UploadVideo = ({ videoFile, setVideoFile }: uploadVideoProps) => {
   const [videoUrl, setVideoUrl] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const encodeFile = (fileBlob: Blob) => {
     setVideoUrl(URL.createObjectURL(fileBlob));
-    setShowNext(true);
   };
   const onChangeVideo = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -30,13 +28,12 @@ const UploadVideo = ({ videoFile, setVideoFile, setShowNext }: uploadVideoProps)
   }, []);
 
   useEffect(() => {
-    let isHaveVideo = false;
     for (let attribute in videoFile) {
-      isHaveVideo = true;
+      if (attribute === "url") setVideoUrl(videoFile["url"]); // 수정 구현을 위한 임시 코드 api 연동 시 삭제
+      else encodeFile(videoFile as Blob);
       break;
     }
-    if (isHaveVideo) encodeFile(videoFile as Blob);
-  }, []);
+  }, [videoFile]);
 
   return (
     <div className="video-upload__container">

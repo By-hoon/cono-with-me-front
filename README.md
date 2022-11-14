@@ -9,7 +9,6 @@
 - React
 - Typescript
 - Sass
-- Redux
 
 <br>
 
@@ -19,15 +18,17 @@
 src
 ├── components
 │   ├── CreateForm.tsx
+│   ├── EditForm.tsx
 │   ├── Router.tsx
 │   ├── SearchSong.tsx
 │   ├── Song.tsx
 │   └── UploadVideo.tsx
 ├── routes
 │   ├── CreateLive.tsx
-│   └── CreateWith.tsx
+│   ├── CreateWith.tsx
+│   └── EditLive.tsx
 ├── shared
-│   ├── Constants.tsx
+│   └── Constants.tsx
 ├── styles
 │   ├── components
 │   │   └── create-form.scss
@@ -36,6 +37,8 @@ src
 │   │   ├── _fonts.scss
 │   │   └── _reset.scss
 │   └── styles.scss
+├── styles
+│   └── data.ts
 ├── App.tsx
 ├── index.tsx
 ├── react-app-env.d.ts

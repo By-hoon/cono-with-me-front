@@ -12,12 +12,11 @@ export interface SongProps {
 }
 
 export interface SearchSongProps {
-  selectedSong: SongProps | undefined;
-  setSelectedSong: React.Dispatch<React.SetStateAction<SongProps | undefined>>;
-  setShowNext: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedSong: SongProps;
+  setSelectedSong: React.Dispatch<React.SetStateAction<SongProps>>;
 }
 
-const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongProps) => {
+const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   const [keyword, setKeyword] = useState("");
   const [songs, setSongs] = useState<Array<SongProps>>([]);
   const [loading, setLoading] = useState(false);
@@ -54,14 +53,21 @@ const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongPr
     setKeyword(e.target.value);
   }, []);
 
-  useEffect(() => {
-    if (selectedSong) {
-      setSongs([selectedSong]);
-      setShowNext(true);
-    }
-  }, []);
   return (
     <div className="search-song__container">
+      {selectedSong["id"] ? (
+        <div className="selected-song__container">
+          <div className="song-image__container">
+            <img src={selectedSong.albumImage} alt={selectedSong.title} className="song__image" />
+          </div>
+          <div className="song-title__container">
+            <span className="song-title__span">{selectedSong.title}</span>
+          </div>
+          <div className="song-artist__container">
+            <span className="song-artist__span">{selectedSong.artist}</span>
+          </div>
+        </div>
+      ) : null}
       <form onSubmit={onSubmit}>
         <input
           placeholder="노래 제목을 입력하세요"
@@ -86,7 +92,6 @@ const SearchSong = ({ selectedSong, setSelectedSong, setShowNext }: SearchSongPr
             albumImage={song.albumImage}
             selectedSong={selectedSong}
             setSelectedSong={setSelectedSong}
-            setShowNext={setShowNext}
           />
         ))}
       </div>
