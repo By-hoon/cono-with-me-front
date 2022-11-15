@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import { SearchSongProps, SongProps } from "./SearchSong";
+import { SongProps } from "../shared/Props";
+import { SearchSongProps } from "./SearchSong";
 
 interface SongComponentProps extends SongProps, SearchSongProps {}
 

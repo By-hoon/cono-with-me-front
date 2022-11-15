@@ -2,14 +2,8 @@ import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { maniadbBaseUrl, xmlToJson } from "../shared/Constants";
+import { SongProps } from "../shared/Props";
 import Song from "./Song";
-
-export interface SongProps {
-  id: string;
-  title: string;
-  artist: string;
-  albumImage: string;
-}
 
 export interface SearchSongProps {
   selectedSong: SongProps;
