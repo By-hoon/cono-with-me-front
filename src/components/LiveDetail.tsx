@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LiveProps } from "../shared/Props";
+import PlayVideo from "./PlayVideo";
 
 const LiveDetail = () => {
   const { id, author, video, song, title, content } = useLocation().state as LiveProps;
@@ -30,7 +31,9 @@ const LiveDetail = () => {
 
   return (
     <div className="live-detail__container">
-      <div className="live-video__container">{/* 비디오 재생 컴포넌트 */}</div>
+      <div className="live-video__container">
+        <PlayVideo video={video} />
+      </div>
       <div className="live-front-info__container">
         <div className="live-title--front">{title}</div>
         <div className="live-author__container">
