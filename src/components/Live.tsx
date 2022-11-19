@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { LiveProps } from "../shared/Props";
 import PlayVideo from "./PlayVideo";
 
-const LiveDetail = () => {
+const Live = () => {
   const { id, author, video, song, title, content } = useLocation().state as LiveProps;
 
   const [showBehindInfo, setShowBehindInfo] = useState(false);
@@ -75,4 +75,4 @@ const LiveDetail = () => {
   );
 };
 
-export default LiveDetail;
+export default Live;
