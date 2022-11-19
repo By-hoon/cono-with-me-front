@@ -38,6 +38,25 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
     });
     setSongs(newResponse);
   };
+
+  const selectSong = ({ id, title, artist, albumImage }: SongProps) => {
+    if (selectedSong.id === id) {
+      setSelectedSong({
+        id: "",
+        title: "",
+        artist: "",
+        albumImage: "",
+      });
+    } else {
+      setSelectedSong({
+        id,
+        title,
+        artist,
+        albumImage,
+      });
+    }
+  };
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -78,15 +97,13 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
       ) : null}
       <div className="songs__container">
         {songs.map((song) => (
-          <Song
+          <div
+            className={`"song__container" ${selectedSong.id === song.id ? "selected-song" : null}`}
             key={song.id}
-            id={song.id}
-            title={song.title}
-            artist={song.artist}
-            albumImage={song.albumImage}
-            selectedSong={selectedSong}
-            setSelectedSong={setSelectedSong}
-          />
+            onClick={() => selectSong(song)}
+          >
+            <Song id={song.id} title={song.title} artist={song.artist} albumImage={song.albumImage} />
+          </div>
         ))}
       </div>
     </div>
