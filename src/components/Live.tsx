@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LiveProps } from "../shared/Props";
+import { DetailHeader } from "./Header";
 import PlayVideo from "./PlayVideo";
 import Song from "./Song";
 
@@ -9,7 +10,7 @@ const Live = () => {
   const { id, author, video, song, title, content } = useLocation().state as LiveProps;
 
   const [showSongDetail, setShowSongDetail] = useState(false);
-  const [showBehindInfo, setShowBehindInfo] = useState(false);
+  const [showDetailInfo, setShowDetailInfo] = useState(false);
   const [showMoreOption, setShowMoreOption] = useState(false);
 
   const appearMoreOption = () => {
@@ -19,11 +20,11 @@ const Live = () => {
     setShowMoreOption(false);
   };
 
-  const appearBehindInfo = () => {
-    setShowBehindInfo(true);
+  const appearDetailInfo = () => {
+    setShowDetailInfo(true);
   };
-  const disappearBehindInfo = () => {
-    setShowBehindInfo(false);
+  const disappearDetailInfo = () => {
+    setShowDetailInfo(false);
   };
   const disappearSongDetail = () => {
     setShowSongDetail(false);
@@ -31,7 +32,7 @@ const Live = () => {
 
   const clickShadow = () => {
     if (showMoreOption) disAppearMoreOption();
-    if (showBehindInfo) disappearBehindInfo();
+    if (showDetailInfo) disappearDetailInfo();
     if (showSongDetail) disappearSongDetail();
   };
 
@@ -40,20 +41,15 @@ const Live = () => {
       <div className="live-video__container">
         <PlayVideo video={video} />
       </div>
-      <div className="live-front-info__container">
-        <div className="live-title--front">{title}</div>
+      <div className="live-info__container">
+        <div className="live-title--simple">{title}</div>
         <div className="live-author__container">
           <div className="live-author">{author}</div>
         </div>
       </div>
-      <div className={`${showBehindInfo ? "live-behind-info__container" : "display-none"}`}>
-        <div className="flex">
-          <div className="live-behind-title">설명</div>
-          <div className="cancel-icon__container" onClick={disappearBehindInfo}>
-            <Icon icon="material-symbols:close" />
-          </div>
-        </div>
-        <div className="live-title--behind">{title}</div>
+      <div className={`${showDetailInfo ? "live-detail-info__container" : "display-none"}`}>
+        <DetailHeader title="설명" closeFunction={disappearDetailInfo} />
+        <div className="live-title">{title}</div>
         <div className="live-more-info__container">
           {/* 좋아요, 조회수, 게시 날짜 등 부가적인 주요 정보 추가 */}
         </div>
@@ -67,24 +63,19 @@ const Live = () => {
           <img src={song.albumImage} alt="live-song" onClick={() => setShowSongDetail(true)} />
           {showSongDetail ? (
             <div className="song-detail__container">
-              <div className="flex">
-                <div className="live-behind-title">노래 정보</div>
-                <div className="cancel-icon__container" onClick={disappearSongDetail}>
-                  <Icon icon="material-symbols:close" />
-                </div>
-              </div>
+              <DetailHeader title="노래 정보" closeFunction={disappearSongDetail} />
               <Song id={song.id} title={song.title} artist={song.artist} albumImage={song.albumImage} />
             </div>
           ) : null}
         </div>
       </div>
       <div className={`${showMoreOption ? "live-more-options__container flex" : "display-none"}`}>
-        <div className="live-more-option" onClick={appearBehindInfo}>
+        <div className="live-more-option" onClick={appearDetailInfo}>
           설명
         </div>
       </div>
       <div
-        className={`${showBehindInfo || showMoreOption || showSongDetail ? "shadow" : "display-none"}`}
+        className={`${showDetailInfo || showMoreOption || showSongDetail ? "shadow" : "display-none"}`}
         onClick={clickShadow}
       />
     </div>
