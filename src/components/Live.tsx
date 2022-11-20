@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { LiveProps } from "../shared/Props";
 import PlayVideo from "./PlayVideo";
+import Song from "./Song";
 
 const Live = () => {
   const { id, author, video, song, title, content } = useLocation().state as LiveProps;
 
+  const [showSongDetail, setShowSongDetail] = useState(false);
   const [showBehindInfo, setShowBehindInfo] = useState(false);
   const [showMoreOption, setShowMoreOption] = useState(false);
 
@@ -23,10 +25,14 @@ const Live = () => {
   const disappearBehindInfo = () => {
     setShowBehindInfo(false);
   };
+  const disappearSongDetail = () => {
+    setShowSongDetail(false);
+  };
 
   const clickShadow = () => {
     if (showMoreOption) disAppearMoreOption();
     if (showBehindInfo) disappearBehindInfo();
+    if (showSongDetail) disappearSongDetail();
   };
 
   return (
@@ -58,8 +64,18 @@ const Live = () => {
           <Icon icon="material-symbols:more-horiz" />
         </div>
         <div className="live-tool__container">
-          <img src={song.albumImage} alt="live-song" />
-          {/* 클릭 시 자세한 노래 정보 컴포넌트 */}
+          <img src={song.albumImage} alt="live-song" onClick={() => setShowSongDetail(true)} />
+          {showSongDetail ? (
+            <div className="song-detail__container">
+              <div className="flex">
+                <div className="live-behind-title">노래 정보</div>
+                <div className="cancel-icon__container" onClick={disappearSongDetail}>
+                  <Icon icon="material-symbols:close" />
+                </div>
+              </div>
+              <Song id={song.id} title={song.title} artist={song.artist} albumImage={song.albumImage} />
+            </div>
+          ) : null}
         </div>
       </div>
       <div className={`${showMoreOption ? "live-more-options__container flex" : "display-none"}`}>
@@ -68,7 +84,7 @@ const Live = () => {
         </div>
       </div>
       <div
-        className={`${showBehindInfo || showMoreOption ? "shadow" : "display-none"}`}
+        className={`${showBehindInfo || showMoreOption || showSongDetail ? "shadow" : "display-none"}`}
         onClick={clickShadow}
       />
     </div>
