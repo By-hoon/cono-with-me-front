@@ -8,17 +8,20 @@ const Song = ({ id, title, artist, albumImage }: SongProps) => {
   return (
     <>
       <div className="song-image__container">
-        <div className={`${loading ? "song-image-loading" : "display-none"}`}>
-          <Icon icon="eos-icons:loading" />
-        </div>
-        <img
-          src={albumImage}
-          alt={title}
-          className={`${loading ? "display-none" : "song__image"}`}
-          onLoad={() => {
-            setLoading(false);
-          }}
-        />
+        {loading ? (
+          <div className="song-image-loading">
+            <Icon icon="eos-icons:loading" />
+          </div>
+        ) : (
+          <img
+            src={albumImage}
+            alt={title}
+            className="song__image"
+            onLoad={() => {
+              setLoading(false);
+            }}
+          />
+        )}
       </div>
       <div className="song-title__container">
         <span className="song-title__span">{title}</span>

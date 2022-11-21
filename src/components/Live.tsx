@@ -47,14 +47,16 @@ const Live = () => {
           <div className="live-author">{author}</div>
         </div>
       </div>
-      <div className={`${showDetailInfo ? "live-detail-info__container" : "display-none"}`}>
-        <DetailHeader title="설명" closeFunction={disappearDetailInfo} />
-        <div className="live-title">{title}</div>
-        <div className="live-more-info__container">
-          {/* 좋아요, 조회수, 게시 날짜 등 부가적인 주요 정보 추가 */}
+      {showDetailInfo ? (
+        <div className="live-detail-info__container">
+          <DetailHeader title="설명" closeFunction={disappearDetailInfo} />
+          <div className="live-title">{title}</div>
+          <div className="live-more-info__container">
+            {/* 좋아요, 조회수, 게시 날짜 등 부가적인 주요 정보 추가 */}
+          </div>
+          <div className="live-content">{content}</div>
         </div>
-        <div className="live-content">{content}</div>
-      </div>
+      ) : null}
       <div className="live-tools__container flex">
         <div className="live-tool__container" onClick={appearMoreOption}>
           <Icon icon="material-symbols:more-horiz" />
@@ -69,11 +71,13 @@ const Live = () => {
           ) : null}
         </div>
       </div>
-      <div className={`${showMoreOption ? "live-more-options__container flex" : "display-none"}`}>
-        <div className="live-more-option" onClick={appearDetailInfo}>
-          설명
+      {showMoreOption ? (
+        <div className="live-more-options__container flex">
+          <div className="live-more-option" onClick={appearDetailInfo}>
+            설명
+          </div>
         </div>
-      </div>
+      ) : null}
       <div
         className={`${showDetailInfo || showMoreOption || showSongDetail ? "shadow" : "display-none"}`}
         onClick={clickShadow}
