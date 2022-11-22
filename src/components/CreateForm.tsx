@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { headcounts, PreferredGenre } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
-import SearchSong, { SongProps } from "./SearchSong";
+import SearchSong from "./SearchSong";
+import { SongProps } from "../shared/Props";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");

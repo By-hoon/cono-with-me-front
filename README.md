@@ -19,6 +19,9 @@ src
 ├── components
 │   ├── CreateForm.tsx
 │   ├── EditForm.tsx
+│   ├── Header.tsx
+│   ├── Live.tsx
+│   ├── PlayVideo.tsx
 │   ├── Router.tsx
 │   ├── SearchSong.tsx
 │   ├── Song.tsx
@@ -26,9 +29,11 @@ src
 ├── routes
 │   ├── CreateLive.tsx
 │   ├── CreateWith.tsx
-│   └── EditLive.tsx
+│   ├── EditLive.tsx
+│   └── PlayLive.tsx
 ├── shared
-│   └── Constants.tsx
+│   ├── Constants.tsx
+│   └── Props.tsx
 ├── styles
 │   ├── components
 │   │   └── create-form.scss
@@ -37,7 +42,7 @@ src
 │   │   ├── _fonts.scss
 │   │   └── _reset.scss
 │   └── styles.scss
-├── styles
+├── test
 │   └── data.ts
 ├── App.tsx
 ├── index.tsx
