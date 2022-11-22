@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
 interface VideoProps {
-  video: { [key: string]: string };
+  video?: { [key: string]: string };
 }
 
 const PlayVideo = ({ video }: VideoProps) => {
@@ -23,7 +23,7 @@ const PlayVideo = ({ video }: VideoProps) => {
   return (
     <div className="play-video__container">
       <ReactPlayer
-        url={video.url}
+        url={video?.url}
         ref={videoRef}
         playing={true}
         muted={isMuted}

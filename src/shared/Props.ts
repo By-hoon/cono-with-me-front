@@ -1,8 +1,8 @@
 export interface SongProps {
-  id: string;
-  title: string;
-  artist: string;
-  albumImage: string;
+  id?: string;
+  title?: string;
+  artist?: string;
+  albumImage?: string;
 }
 
 export interface LiveProps {
