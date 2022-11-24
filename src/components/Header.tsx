@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
 interface DetailHeaderProps {
   title: string;
@@ -6,7 +7,13 @@ interface DetailHeaderProps {
 }
 
 export const Header = () => {
-  return <div className="header__container">browser</div>;
+  return (
+    <div className="header__container">
+      <div className="logo__container">
+        <Link to="/">코노윗미</Link>
+      </div>
+    </div>
+  );
 };
 
 export const MobileHeader = () => {
