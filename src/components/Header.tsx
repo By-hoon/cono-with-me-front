@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { isBrowser } from "react-device-detect";
 import { Link } from "react-router-dom";
 
 interface DetailHeaderProps {
@@ -8,16 +9,18 @@ interface DetailHeaderProps {
 
 export const Header = () => {
   return (
-    <div className="header__container">
-      <div className="logo__container">
-        <Link to="/">코노윗미</Link>
-      </div>
-    </div>
+    <>
+      {isBrowser ? (
+        <div className="header__container">
+          <div className="logo__container">
+            <Link to="/">코노윗미</Link>
+          </div>
+        </div>
+      ) : (
+        <div className="mobile-header__container">mobile</div>
+      )}
+    </>
   );
-};
-
-export const MobileHeader = () => {
-  return <div className="mobile-header__container">mobile</div>;
 };
 
 export const DetailHeader = ({ title, closeFunction }: DetailHeaderProps) => {
