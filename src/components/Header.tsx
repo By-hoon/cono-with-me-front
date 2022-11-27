@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
 import { Link } from "react-router-dom";
 
@@ -8,18 +9,44 @@ interface DetailHeaderProps {
 }
 
 export const Header = () => {
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showCreateMenu, setShowCreateMenu] = useState(false);
+
+  const profileRef = useRef<HTMLInputElement>(null);
+  const createRef = useRef<HTMLInputElement>(null);
   const onSubmitSearch = () => {
     //검색 로직
   };
+  const onClickProfileMenu = () => {
+    setShowProfileMenu((show) => !show);
+  };
+  const onClickCreateMenu = () => {
+    setShowCreateMenu((show) => !show);
+  };
+  const onClickOutSide = (e: any) => {
+    if (showProfileMenu && profileRef.current && !profileRef.current.contains(e.target)) {
+      setShowProfileMenu(false);
+    }
+    if (showCreateMenu && createRef.current && !createRef.current.contains(e.target)) {
+      setShowCreateMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", onClickOutSide);
+    return () => {
+      document.removeEventListener("click", onClickOutSide);
+    };
+  });
 
   return (
     <>
       {isBrowser ? (
-        <div className="header__container">
+        <div className="header__container flex">
           <div className="logo__container">
             <Link to="/">코노윗미</Link>
           </div>
-          <div className="header-category__container">
+          <div className="header-category__container flex">
             <div className="header-category">윗미</div>
             <div className="header-category">라이브</div>
           </div>
@@ -35,18 +62,28 @@ export const Header = () => {
             </form>
           </div>
           <div className="header-tool__container">
-            <div className="header-profile-image__container">
+            <div className="header-profile-image__container" ref={profileRef}>
               <img
+                className="header-profile__img"
                 src="https://firebasestorage.googleapis.com/v0/b/myplaylist-783c8.appspot.com/o/KakaoTalk_20210927_025101163.jpg?alt=media&token=4f3c0769-6a1b-40ee-a787-a4fd7e11487f"
                 alt="profile-link"
+                onClick={onClickProfileMenu}
               />
+              {showProfileMenu ? (
+                <div className="header-profile-menu__container">
+                  <div className="header-profile-menu">마이페이지</div>
+                  <div className="header-profile-menu">로그아웃</div>
+                </div>
+              ) : null}
             </div>
-            <div className="create-button__container">
-              <Icon icon="material-symbols:add-box-rounded" />
-              <div className="create-option__container">
-                <div className="create-link__container">윗미 생성</div>
-                <div className="create-link__container">라이브 생성</div>
-              </div>
+            <div className="create-button__container" ref={createRef}>
+              <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
+              {showCreateMenu ? (
+                <div className="create-option__container">
+                  <div className="create-link__container">윗미 생성</div>
+                  <div className="create-link__container">라이브 생성</div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -98,12 +135,14 @@ export const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="m-header-icon__container">
-              <Icon icon="material-symbols:add-box-rounded" />
-              <div className="create-option__container">
-                <div className="create-link__container">윗미 생성</div>
-                <div className="create-link__container">라이브 생성</div>
-              </div>
+            <div className="m-header-icon__container" ref={createRef}>
+              <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
+              {showCreateMenu ? (
+                <div className="create-option__container">
+                  <div className="create-link__container">윗미 생성</div>
+                  <div className="create-link__container">라이브 생성</div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
