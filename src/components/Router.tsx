@@ -10,9 +10,9 @@ const Router = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/create/with" element={<CreateWith />} />
-        <Route path="/create/live" element={<CreateLive />} />
-        <Route path="/edit/live" element={<EditLive />} />
+        <Route path="/with/create" element={<CreateWith />} />
+        <Route path="/live/create" element={<CreateLive />} />
+        <Route path="/live/edit" element={<EditLive />} />
         <Route path="/live/play" element={<PlayLive />} />
       </Routes>
     </BrowserRouter>

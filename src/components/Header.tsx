@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface DetailHeaderProps {
   title: string;
@@ -11,9 +11,13 @@ interface DetailHeaderProps {
 export const Header = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showCreateMenu, setShowCreateMenu] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState("");
+
+  const location = useLocation();
 
   const profileRef = useRef<HTMLInputElement>(null);
   const createRef = useRef<HTMLInputElement>(null);
+
   const onSubmitSearch = () => {
     //검색 로직
   };
@@ -38,52 +42,71 @@ export const Header = () => {
       document.removeEventListener("click", onClickOutSide);
     };
   });
+  useEffect(() => {
+    const locationSplit = location.pathname.split("/");
+    const locationKeyword = locationSplit.pop() || "home";
+    setCurrentLocation(locationKeyword);
+  }, [location]);
 
   return (
     <>
       {isBrowser ? (
         <div className="header__container flex">
-          <div className="logo__container">
-            <Link to="/">코노윗미</Link>
-          </div>
-          <div className="header-category__container flex">
-            <div className="header-category">윗미</div>
-            <div className="header-category">라이브</div>
-          </div>
-          <div className="header-search__container">
-            <form onSubmit={onSubmitSearch}>
-              <Icon icon="ic:baseline-search" />
-              <input
-                className="header-search__input"
-                type="text"
-                name="header-search"
-                placeholder="통합 검색"
-              />
-            </form>
-          </div>
-          <div className="header-tool__container">
-            <div className="header-profile-image__container" ref={profileRef}>
-              <img
-                className="header-profile__img"
-                src="https://firebasestorage.googleapis.com/v0/b/myplaylist-783c8.appspot.com/o/KakaoTalk_20210927_025101163.jpg?alt=media&token=4f3c0769-6a1b-40ee-a787-a4fd7e11487f"
-                alt="profile-link"
-                onClick={onClickProfileMenu}
-              />
-              {showProfileMenu ? (
-                <div className="header-profile-menu__container">
-                  <div className="header-profile-menu">마이페이지</div>
-                  <div className="header-profile-menu">로그아웃</div>
-                </div>
-              ) : null}
+          <div className="flex">
+            <div className="logo__container">
+              <Link to="/">코노윗미</Link>
             </div>
-            <div className="create-button__container" ref={createRef}>
-              <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
-              {showCreateMenu ? (
-                <div className="create-option__container">
-                  <div className="create-link__container">윗미 생성</div>
-                  <div className="create-link__container">라이브 생성</div>
-                </div>
-              ) : null}
+            <div className="header-category__container flex">
+              <Link
+                to="/with"
+                className={` ${currentLocation === "with" ? "header-category--current" : "header-category"}`}
+              >
+                윗미
+              </Link>
+              <Link
+                to="/live"
+                className={` ${currentLocation === "live" ? "header-category--current" : "header-category"}`}
+              >
+                라이브
+              </Link>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="header-search__container">
+              <form onSubmit={onSubmitSearch}>
+                <Icon icon="ic:baseline-search" />
+                <input
+                  className="header-search__input"
+                  type="text"
+                  name="header-search"
+                  placeholder="통합 검색"
+                />
+              </form>
+            </div>
+            <div className="header-tool__container flex">
+              <div className="header-profile-image__container" ref={profileRef}>
+                <img
+                  className="header-profile__img"
+                  src="https://firebasestorage.googleapis.com/v0/b/myplaylist-783c8.appspot.com/o/KakaoTalk_20210927_025101163.jpg?alt=media&token=4f3c0769-6a1b-40ee-a787-a4fd7e11487f"
+                  alt="profile-link"
+                  onClick={onClickProfileMenu}
+                />
+                {showProfileMenu ? (
+                  <div className="header-profile-menu__container">
+                    <div className="header-profile-menu">마이페이지</div>
+                    <div className="header-profile-menu">로그아웃</div>
+                  </div>
+                ) : null}
+              </div>
+              <div className="create-button__container" ref={createRef}>
+                <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
+                {showCreateMenu ? (
+                  <div className="create-option__container">
+                    <div className="create-link__container">윗미 생성</div>
+                    <div className="create-link__container">라이브 생성</div>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
