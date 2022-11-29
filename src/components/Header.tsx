@@ -49,10 +49,10 @@ export const Header = () => {
   }, [location]);
 
   return (
-    <>
+    <div className="header">
       {isBrowser ? (
         <div className="header__container flex">
-          <div className="flex">
+          <div className="header-left__container flex">
             <div className="logo__container">
               <Link to="/">코노윗미</Link>
             </div>
@@ -71,15 +71,16 @@ export const Header = () => {
               </Link>
             </div>
           </div>
-          <div className="flex">
+          <div className="header-right__container flex">
             <div className="header-search__container">
-              <form onSubmit={onSubmitSearch}>
+              <form onSubmit={onSubmitSearch} className="flex">
                 <Icon icon="ic:baseline-search" />
                 <input
                   className="header-search__input"
                   type="text"
                   name="header-search"
                   placeholder="통합 검색"
+                  autoComplete="off"
                 />
               </form>
             </div>
@@ -92,18 +93,26 @@ export const Header = () => {
                   onClick={onClickProfileMenu}
                 />
                 {showProfileMenu ? (
-                  <div className="header-profile-menu__container">
-                    <div className="header-profile-menu">마이페이지</div>
+                  <div className="header-profile-menu__container flex">
+                    <Link to="/my" className="header-profile-menu">
+                      마이페이지
+                    </Link>
                     <div className="header-profile-menu">로그아웃</div>
                   </div>
                 ) : null}
               </div>
               <div className="create-button__container" ref={createRef}>
-                <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
+                <button className="create__button" onClick={onClickCreateMenu}>
+                  글쓰기 <Icon icon="material-symbols:keyboard-arrow-down-rounded" />
+                </button>
                 {showCreateMenu ? (
-                  <div className="create-option__container">
-                    <div className="create-link__container">윗미 생성</div>
-                    <div className="create-link__container">라이브 생성</div>
+                  <div className="create-option__container flex">
+                    <Link to="/with/create" className="create-link__container">
+                      윗미 생성
+                    </Link>
+                    <Link to="/live/create" className="create-link__container">
+                      라이브 생성
+                    </Link>
                   </div>
                 ) : null}
               </div>
@@ -119,18 +128,35 @@ export const Header = () => {
               </div>
               <div className="sidebar-profile-image__container">
                 <img
+                  className="sidebar-profile__image"
                   src="https://firebasestorage.googleapis.com/v0/b/myplaylist-783c8.appspot.com/o/KakaoTalk_20210927_025101163.jpg?alt=media&token=4f3c0769-6a1b-40ee-a787-a4fd7e11487f"
                   alt="profile-link"
                 />
               </div>
             </div>
             <div className="sidebar-profile-menu__container">
-              <div className="sidebar-profile-menu">마이페이지</div>
+              <Link to="/my" className="sidebar-profile-menu">
+                마이페이지
+              </Link>
               <div className="sidebar-profile-menu">로그아웃</div>
             </div>
             <div className="sidebar-category__container">
-              <div className="sidebar-category">윗미</div>
-              <div className="sidebar-category">라이브</div>
+              <Link
+                to="/with"
+                className={` ${
+                  currentLocation === "with" ? "sidebar-category--current" : "sidebar-category"
+                }`}
+              >
+                윗미
+              </Link>
+              <Link
+                to="/live"
+                className={` ${
+                  currentLocation === "live" ? "sidebar-category--current" : "sidebar-category"
+                }`}
+              >
+                라이브
+              </Link>
             </div>
           </div>
           <div className="m-header-icon__container">
@@ -162,15 +188,19 @@ export const Header = () => {
               <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
               {showCreateMenu ? (
                 <div className="create-option__container">
-                  <div className="create-link__container">윗미 생성</div>
-                  <div className="create-link__container">라이브 생성</div>
+                  <Link to="/with/create" className="create-link__container">
+                    윗미 생성
+                  </Link>
+                  <Link to="/live/create" className="create-link__container">
+                    라이브 생성
+                  </Link>
                 </div>
               ) : null}
             </div>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
