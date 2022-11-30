@@ -19,6 +19,7 @@
 }
 
 .logo__container,
+.m-sidebar-logo__container,
 .m-logo__container {
   display: flex;
   a {
@@ -191,4 +192,138 @@
       transform: translate(-30px, 5px);
     }
   }
+}
+
+/* 모바일 */
+
+.m-header__container {
+  width: 100%;
+  height: 55px;
+  margin: 0 auto;
+  padding: 0 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.m-header-icon__container{
+  font-size: 28px;
+}
+
+.m-background{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(33, 38, 41, 0.5);
+}
+.sidebar__container{
+  width: 260px;
+  height: 100%;
+  background-color: #ffffff;
+  animation: appear-sidebar 0.3s forwards;
+  @keyframes appear-sidebar {
+    from {
+      transform: translate(-20px, 0px);
+    }
+    to {
+      transform: translate(0px, 0px);
+    }
+  }
+}
+.sidebar-header__container{
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px 0 20px;
+}
+.sidebar-profile__image{
+  width: 50px;
+  height: 50px;
+}
+.sidebar-profile-menu__container{
+  flex-wrap: wrap;
+  margin: 0 10px;
+  padding: 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $dull-color;
+}
+.sidebar-profile-menu{
+  width: 100%;
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.sidebar-category__container{
+  height: 200px;
+  flex-direction: column;
+  margin: 10px 10px;
+  padding: 10px;
+  a{
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 10px 0;
+  }
+}
+.sidebar-category--current {
+  color: $base-color;
+}
+
+.m-logo__container{
+  margin-left: 43px;
+}
+
+.m-header-search__foward{
+  .m-header-icon__container{
+    margin-right: 10px;
+  }
+}
+
+.m-header-search__container--behind{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px 25px;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #ffffff;
+  animation: appear-behind-search 0.5s forwards;
+  @keyframes appear-behind-search {
+    from {
+      transform: translate(45px, 0px);
+    }
+    to {
+      transform: translate(0px, 0px);
+    }
+  }
+}
+
+.m-header-search__container{
+  @extend .header-search__container;
+  width: 80% !important;
+  .flex{
+    align-items: center;
+  }
+}
+
+.m-header-search__input{
+  @extend .header-search__input
+}
+
+.m-header-search-cancle__container{
+  width: 50px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.m-create-option__container{
+  @extend .create-option__container;
+  position: absolute;
+  top: 40px;
+  right: -20px;
 }
