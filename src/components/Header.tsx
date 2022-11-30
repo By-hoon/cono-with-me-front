@@ -11,12 +11,15 @@ interface DetailHeaderProps {
 export const Header = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showCreateMenu, setShowCreateMenu] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [showBehindSearch, setShowBehindSearch] = useState(false);
   const [currentLocation, setCurrentLocation] = useState("");
 
   const location = useLocation();
 
   const profileRef = useRef<HTMLInputElement>(null);
   const createRef = useRef<HTMLInputElement>(null);
+  const sidebarRef = useRef<HTMLInputElement>(null);
 
   const onSubmitSearch = () => {
     //검색 로직
@@ -27,12 +30,24 @@ export const Header = () => {
   const onClickCreateMenu = () => {
     setShowCreateMenu((show) => !show);
   };
+  const onClickSidebar = () => {
+    setShowSidebar((show) => !show);
+  };
+  const appearBehindSearch = () => {
+    setShowBehindSearch(true);
+  };
+  const disappearBehindSearch = () => {
+    setShowBehindSearch(false);
+  };
   const onClickOutSide = (e: any) => {
     if (showProfileMenu && profileRef.current && !profileRef.current.contains(e.target)) {
       setShowProfileMenu(false);
     }
     if (showCreateMenu && createRef.current && !createRef.current.contains(e.target)) {
       setShowCreateMenu(false);
+    }
+    if (showSidebar && sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+      setShowSidebar(false);
     }
   };
 
@@ -120,69 +135,76 @@ export const Header = () => {
           </div>
         </div>
       ) : (
-        <div className="m-header__container ">
-          <div className="sidebar__container ">
-            <div className="sidebar-header__container ">
-              <div className="m-logo__container">
-                <Link to="/">코노윗미</Link>
-              </div>
-              <div className="sidebar-profile-image__container">
-                <img
-                  className="sidebar-profile__image"
-                  src="https://firebasestorage.googleapis.com/v0/b/myplaylist-783c8.appspot.com/o/KakaoTalk_20210927_025101163.jpg?alt=media&token=4f3c0769-6a1b-40ee-a787-a4fd7e11487f"
-                  alt="profile-link"
-                />
-              </div>
-            </div>
-            <div className="sidebar-profile-menu__container">
-              <Link to="/my" className="sidebar-profile-menu">
-                마이페이지
-              </Link>
-              <div className="sidebar-profile-menu">로그아웃</div>
-            </div>
-            <div className="sidebar-category__container">
-              <Link
-                to="/with"
-                className={` ${
-                  currentLocation === "with" ? "sidebar-category--current" : "sidebar-category"
-                }`}
-              >
-                윗미
-              </Link>
-              <Link
-                to="/live"
-                className={` ${
-                  currentLocation === "live" ? "sidebar-category--current" : "sidebar-category"
-                }`}
-              >
-                라이브
-              </Link>
-            </div>
-          </div>
-          <div className="m-header-icon__container">
+        <div className="m-header__container">
+          <div className="m-header-icon__container" onClick={onClickSidebar} ref={sidebarRef}>
             <Icon icon="material-symbols:menu-rounded" />
+            {showSidebar ? (
+              <div className="sidebar__container">
+                <div className="sidebar-header__container">
+                  <div className="m-logo__container">
+                    <Link to="/">코노윗미</Link>
+                  </div>
+                  <div className="sidebar-profile-image__container">
+                    <img
+                      className="sidebar-profile__image"
+                      src="https://firebasestorage.googleapis.com/v0/b/myplaylist-783c8.appspot.com/o/KakaoTalk_20210927_025101163.jpg?alt=media&token=4f3c0769-6a1b-40ee-a787-a4fd7e11487f"
+                      alt="profile-link"
+                    />
+                  </div>
+                </div>
+                <div className="sidebar-profile-menu__container">
+                  <Link to="/my" className="sidebar-profile-menu">
+                    마이페이지
+                  </Link>
+                  <div className="sidebar-profile-menu">로그아웃</div>
+                </div>
+                <div className="sidebar-category__container">
+                  <Link
+                    to="/with"
+                    className={` ${
+                      currentLocation === "with" ? "sidebar-category--current" : "sidebar-category"
+                    }`}
+                  >
+                    윗미
+                  </Link>
+                  <Link
+                    to="/live"
+                    className={` ${
+                      currentLocation === "live" ? "sidebar-category--current" : "sidebar-category"
+                    }`}
+                  >
+                    라이브
+                  </Link>
+                </div>
+              </div>
+            ) : null}
           </div>
           <div className="m-logo__container">
             <Link to="/">코노윗미</Link>
           </div>
           <div className="flex">
             <div className="m-header-search__container">
-              <div className="m-header-icon__container">
+              <div className="m-header-icon__container" onClick={appearBehindSearch}>
                 <Icon icon="ic:baseline-search" />
               </div>
-              <div className="m-header-search__container--behind">
-                <div className="header-search__container">
-                  <form onSubmit={onSubmitSearch}>
-                    <Icon icon="ic:baseline-search" />
-                    <input
-                      className="header-search__input"
-                      type="text"
-                      name="header-search"
-                      placeholder="통합 검색"
-                    />
-                  </form>
+              {showBehindSearch ? (
+                <div className="m-header-search__container--behind">
+                  <div className="m-header-search__container">
+                    <form onSubmit={onSubmitSearch}>
+                      <Icon icon="ic:baseline-search" />
+                      <input
+                        className="m-header-search__input"
+                        type="text"
+                        name="header-search"
+                        placeholder="통합 검색"
+                      />
+                    </form>
+                    <button className="m-header-search-cancle__button" onClick={disappearBehindSearch}>
+                      취소
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
             <div className="m-header-icon__container" ref={createRef}>
               <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
