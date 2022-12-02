@@ -1,17 +1,18 @@
-//components
-@import "./components/create-form.scss";
-
 //config
 @import "./config/_colors.scss";
 @import "./config/_fonts.scss";
 @import "./config/_reset.scss";
+
+//components
+@import "./components/create-form.scss";
+@import "./components/header.scss";
 
 //globalStyles
 body {
   margin: 90px auto 0 auto;
   width: 100%;
   @media (min-width: 768px) {
-    width: 630px;
+    width: 1140px;
   }
 }
 
@@ -26,10 +27,9 @@ input {
 }
 
 .flex {
-  width: 100%;
   display: flex;
 }
 
-.display-none{
+.display-none {
   display: none;
 }
