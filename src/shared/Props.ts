@@ -13,3 +13,9 @@ export interface LiveProps {
   title: string;
   content: string;
 }
+
+export interface LiveCardProps {
+  id: string;
+  title: string;
+  thumbnail: string;
+}
