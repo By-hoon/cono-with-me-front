@@ -21,6 +21,8 @@ src
 │   ├── EditForm.tsx
 │   ├── Header.tsx
 │   ├── Live.tsx
+│   ├── LiveCard.tsx
+│   ├── Lives.tsx
 │   ├── PlayVideo.tsx
 │   ├── Router.tsx
 │   ├── SearchSong.tsx
@@ -30,6 +32,7 @@ src
 │   ├── CreateLive.tsx
 │   ├── CreateWith.tsx
 │   ├── EditLive.tsx
+│   ├── LiveList.tsx
 │   └── PlayLive.tsx
 ├── shared
 │   ├── Constants.tsx
