@@ -27,13 +27,16 @@ src
 │   ├── Router.tsx
 │   ├── SearchSong.tsx
 │   ├── Song.tsx
-│   └── UploadVideo.tsx
+│   ├── UploadVideo.tsx
+│   ├── WithCard.tsx
+│   └── Withs.tsx
 ├── routes
 │   ├── CreateLive.tsx
 │   ├── CreateWith.tsx
 │   ├── EditLive.tsx
 │   ├── LiveList.tsx
-│   └── PlayLive.tsx
+│   ├── PlayLive.tsx
+│   └── WithList.tsx
 ├── shared
 │   ├── Constants.tsx
 │   └── Props.tsx
