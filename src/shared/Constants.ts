@@ -12,7 +12,6 @@ export const PreferredGenre: { [key: string]: boolean } = {
   락: false,
   트로트: false,
   팝송: false,
-  "J-POP": false,
   그외: false,
 };
 
