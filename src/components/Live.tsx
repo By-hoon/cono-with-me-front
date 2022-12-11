@@ -18,7 +18,6 @@ const Live = () => {
   const disAppearMoreOption = () => {
     setShowMoreOption(false);
   };
-
   const appearDetailInfo = () => {
     setShowDetailInfo(true);
   };
@@ -42,50 +41,54 @@ const Live = () => {
     <div className="live-detail__container">
       <div className="live-video__container">
         <PlayVideo video={live?.video} />
-      </div>
-      {<>{console.log("run")}</>}
-      <div className="live-info__container">
-        <div className="live-title--simple">{live?.title}</div>
-        <div className="live-author__container">
-          <div className="live-author">{live?.author}</div>
-        </div>
-      </div>
-      {showDetailInfo ? (
-        <div className="live-detail-info__container">
-          <DetailHeader title="설명" closeFunction={disappearDetailInfo} />
-          <div className="live-title">{live?.title}</div>
-          <div className="live-more-info__container">
-            {/* 좋아요, 조회수, 게시 날짜 등 부가적인 주요 정보 추가 */}
+        <div className="live-info__container flex">
+          <div className="live-title--simple">{live?.title}</div>
+          <div className="live-author__container">
+            <div className="live-author">{live?.author}</div>
           </div>
-          <div className="live-content">{live?.content}</div>
         </div>
-      ) : null}
-      <div className="live-tools__container flex">
-        <div className="live-tool__container" onClick={appearMoreOption}>
-          <Icon icon="material-symbols:more-horiz" />
+        <div className="live-tools__container flex">
+          <div className="live-tool__container" onClick={appearMoreOption}>
+            <Icon icon="material-symbols:more-horiz" />
+          </div>
+          <div className="live-tool__container">
+            <img
+              className="live-album__img"
+              src={live?.song.albumImage}
+              alt="live-song"
+              onClick={() => setShowSongDetail(true)}
+            />
+            {showSongDetail ? (
+              <div className="song-detail__container">
+                <DetailHeader title="노래 정보" closeFunction={disappearSongDetail} />
+                <Song
+                  id={live?.song.id}
+                  title={live?.song.title}
+                  artist={live?.song.artist}
+                  albumImage={live?.song.albumImage}
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
-        <div className="live-tool__container">
-          <img src={live?.song.albumImage} alt="live-song" onClick={() => setShowSongDetail(true)} />
-          {showSongDetail ? (
-            <div className="song-detail__container">
-              <DetailHeader title="노래 정보" closeFunction={disappearSongDetail} />
-              <Song
-                id={live?.song.id}
-                title={live?.song.title}
-                artist={live?.song.artist}
-                albumImage={live?.song.albumImage}
-              />
+        {showMoreOption ? (
+          <div className="live-more-options__container flex">
+            <div className="live-more-option" onClick={appearDetailInfo}>
+              설명
             </div>
-          ) : null}
-        </div>
-      </div>
-      {showMoreOption ? (
-        <div className="live-more-options__container flex">
-          <div className="live-more-option" onClick={appearDetailInfo}>
-            설명
           </div>
-        </div>
-      ) : null}
+        ) : null}
+        {showDetailInfo ? (
+          <div className="live-detail-info__container">
+            <DetailHeader title="설명" closeFunction={clickShadow} />
+            <div className="live-title">{live?.title}</div>
+            <div className="live-more-info__container">
+              {/* 좋아요, 조회수, 게시 날짜 등 부가적인 주요 정보 추가 */}
+            </div>
+            <div className="live-content">{live?.content}</div>
+          </div>
+        ) : null}
+      </div>
       <div
         className={`${showDetailInfo || showMoreOption || showSongDetail ? "shadow" : "display-none"}`}
         onClick={clickShadow}
