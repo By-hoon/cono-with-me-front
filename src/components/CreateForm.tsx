@@ -5,6 +5,7 @@ import { headcounts, PreferredGenre } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
+import Title from "./Title";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -86,6 +87,7 @@ export const CreateWithForm = () => {
 
   return (
     <div className="create-with__container">
+      <Title title={"윗미 생성"} />
       <form onSubmit={onSubmit}>
         <div className="title-input__container">
           <div className="flex">
@@ -274,6 +276,7 @@ export const CreateLiveForm = () => {
   };
   return (
     <div className="create-with__container">
+      <Title title={"라이브 생성"} />
       {step !== "video" ? (
         <div className="back-button__container">
           <button onClick={goBackStep}>
