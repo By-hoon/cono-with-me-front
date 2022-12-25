@@ -37,8 +37,8 @@ const Lives = () => {
   }, []);
   return (
     <div className="lives__container flex">
-      <Title title={"라이브 목록"} />
-      <div className="lives-header__container">
+      <div className="lives-header__container flex">
+        <Title title={"라이브 목록"} />
         <div className="selected-sort-option flex" onClick={onClickSortOption} ref={sortOptionRef}>
           {selectedSortOption}
           <Icon icon="material-symbols:keyboard-arrow-down-rounded" />

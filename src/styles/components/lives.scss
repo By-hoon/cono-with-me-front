@@ -1,0 +1,46 @@
+.lives__container {
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  overflow: hidden;
+}
+.lives-header__container {
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px 7px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid $dull-color;
+}
+
+.selected-sort-option {
+  font-size: 17px;
+}
+.sort-options__container {
+  width: 110px;
+  position: absolute;
+  top: 42px;
+  right: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+  padding-top: 5px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(218, 221, 224);
+  border-radius: 6px;
+  box-shadow: lighten($shadow-color, 30%) 0px 3px 10px 0px;
+  z-index: 2;
+  animation: appear-sort-options 0.3s forwards;
+  @keyframes appear-sort-options {
+    from {
+      transform: translate(0px, -5px);
+    }
+    to {
+      transform: translate(0px, 0px);
+    }
+  }
+}
+.sort-option {
+  height: 24px;
+  font-size: 17px;
+}
