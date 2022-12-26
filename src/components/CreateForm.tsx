@@ -274,9 +274,28 @@ export const CreateLiveForm = () => {
     }
     return null;
   };
+  const subTitleRender = () => {
+    switch (step) {
+      case "video": {
+        return <div className="create-sub-title">비디오 입력</div>;
+      }
+      case "song": {
+        return <div className="create-sub-title">노래 선택</div>;
+      }
+      case "content": {
+        return <div className="create-sub-title">내용 입력</div>;
+      }
+    }
+    return null;
+  };
   return (
-    <div className="create-with__container">
-      <Title title={"라이브 생성"} />
+    <div className="create-live__container">
+      <div className="create-live-header__container">
+        <div className="flex">
+          <Title title={"라이브 생성"} />
+          {subTitleRender()}
+        </div>
+      </div>
       {step !== "video" ? (
         <div className="back-button__container">
           <button onClick={goBackStep}>
