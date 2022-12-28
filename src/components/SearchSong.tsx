@@ -69,7 +69,7 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
   return (
     <div className="search-song__container">
       {selectedSong["id"] ? (
-        <div className="selected-song__container">
+        <div className="selected-song__container flex">
           <div className="song-image__container">
             <img src={selectedSong.albumImage} alt={selectedSong.title} className="song__image" />
           </div>
@@ -81,15 +81,17 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
           </div>
         </div>
       ) : null}
-      <form onSubmit={onSubmit}>
-        <input
-          placeholder="노래 제목을 입력하세요"
-          name="keyword"
-          className="search-song__input"
-          value={keyword}
-          onChange={onChangeKeyword}
-        />
-      </form>
+      <div className="search-song-input__container">
+        <form onSubmit={onSubmit}>
+          <input
+            placeholder="노래 제목을 입력하세요"
+            name="keyword"
+            className="search-song__input"
+            value={keyword}
+            onChange={onChangeKeyword}
+          />
+        </form>
+      </div>
       {loading ? (
         <div className="songs-loading__container">
           <Icon icon="eos-icons:loading" />
@@ -98,7 +100,7 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
       <div className="songs__container">
         {songs.map((song) => (
           <div
-            className={`"song__container" ${selectedSong.id === song.id ? "selected-song" : null}`}
+            className={`${selectedSong.id === song.id ? "selected-song" : null}`}
             key={song.id}
             onClick={() => selectSong(song)}
           >
