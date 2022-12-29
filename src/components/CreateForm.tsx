@@ -178,7 +178,7 @@ export const CreateWithForm = () => {
 };
 
 export const CreateLiveForm = () => {
-  const [step, setStep] = useState("video");
+  const [step, setStep] = useState("content");
   const [videoFile, setVideoFile] = useState({});
   const [selectedSong, setSelectedSong] = useState<SongProps>({
     id: "",
@@ -294,29 +294,31 @@ export const CreateLiveForm = () => {
         <div className="flex">
           <Title title={"라이브 생성"} />
           {subTitleRender()}
+          <div className="interaction-buttons__container flex">
+            {step !== "video" ? (
+              <div className="interaction-button__container">
+                <button className="interaction__button" onClick={goBackStep}>
+                  이전
+                </button>
+              </div>
+            ) : null}
+            {step !== "content" ? (
+              <div className={`interaction-button__container ${showNext ? null : "display-none"}`}>
+                <button className="interaction__button" onClick={goNextStep}>
+                  다음
+                </button>
+              </div>
+            ) : (
+              <div className="interaction-button__container">
+                <button className="interaction__button" onClick={createLive}>
+                  라이브 생성
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      {step !== "video" ? (
-        <div className="back-button__container">
-          <button onClick={goBackStep}>
-            <Icon icon="bx:arrow-back" />
-          </button>
-        </div>
-      ) : null}
       <div className="step__container">{stepRender()}</div>
-      {step !== "content" ? (
-        <div className={`"next-button__container" ${showNext ? null : "display-none"}`}>
-          <button className="next__button" onClick={goNextStep}>
-            다음
-          </button>
-        </div>
-      ) : (
-        <div className="submit-button__container">
-          <button className="submit__button" onClick={createLive}>
-            라이브 생성
-          </button>
-        </div>
-      )}
     </div>
   );
 };

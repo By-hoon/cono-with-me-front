@@ -80,7 +80,7 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
         </form>
       </div>
       {loading ? (
-        <div className="songs-loading__container">
+        <div className="songs-loading__container flex">
           <Icon icon="eos-icons:loading" />
         </div>
       ) : null}
