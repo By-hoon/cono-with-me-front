@@ -45,10 +45,20 @@ const UploadVideo = ({ videoFile, setVideoFile }: uploadVideoProps) => {
           accept="video/mp4,video/mkv, video/x-m4v,video/*"
           onChange={onChangeVideo}
         />
-        <button onClick={onUploadImageButtonClick}>비디오 선택</button>
       </div>
       <div className="video-preview__container">
-        <div className="video-preview__container">{videoUrl ? <video src={videoUrl} controls /> : null}</div>
+        {videoUrl ? (
+          <>
+            <video src={videoUrl} controls />
+            <button className="video-change__button" onClick={onUploadImageButtonClick}>
+              다시 고르기
+            </button>
+          </>
+        ) : (
+          <button className="video-input__button" onClick={onUploadImageButtonClick}>
+            화면을 클릭하여 비디오 선택
+          </button>
+        )}
       </div>
     </div>
   );

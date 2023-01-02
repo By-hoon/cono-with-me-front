@@ -135,14 +135,14 @@ export const Header = () => {
           </div>
         </div>
       ) : (
-        <div className="m-header__container flex">
-          <div className="m-header-icon__container" onClick={onClickSidebar} ref={sidebarRef}>
+        <div className="header__container flex">
+          <div className="header-icon__container" onClick={onClickSidebar} ref={sidebarRef}>
             <Icon icon="material-symbols:menu-rounded" />
             {showSidebar ? (
-              <div className="m-background">
+              <div className="background">
                 <div className="sidebar__container">
                   <div className="sidebar-header__container flex">
-                    <div className="m-sidebar-logo__container">
+                    <div className="sidebar-logo__container">
                       <Link to="/">코노윗미</Link>
                     </div>
                     <div className="sidebar-profile-image__container">
@@ -181,39 +181,39 @@ export const Header = () => {
               </div>
             ) : null}
           </div>
-          <div className="m-logo__container">
+          <div className="logo__container">
             <Link to="/">코노윗미</Link>
           </div>
           <div className="flex">
-            <div className="m-header-search__foward">
-              <div className="m-header-icon__container" onClick={appearBehindSearch}>
+            <div className="header-search__foward">
+              <div className="header-icon__container" onClick={appearBehindSearch}>
                 <Icon icon="ic:baseline-search" />
               </div>
               {showBehindSearch ? (
-                <div className="m-background">
-                  <div className="m-header-search__container--behind flex">
-                    <div className="m-header-search__container">
+                <div className="background">
+                  <div className="header-search__container--behind flex">
+                    <div className="header-search__container">
                       <form onSubmit={onSubmitSearch} className="flex">
                         <Icon icon="ic:baseline-search" />
                         <input
-                          className="m-header-search__input"
+                          className="header-search__input"
                           type="text"
                           name="header-search"
                           placeholder="통합 검색"
                         />
                       </form>
                     </div>
-                    <div className="m-header-search-cancle__container flex">
+                    <div className="header-search-cancle__container flex">
                       <span onClick={disappearBehindSearch}>취소</span>
                     </div>
                   </div>
                 </div>
               ) : null}
             </div>
-            <div className="m-header-icon__container" ref={createRef}>
+            <div className="header-icon__container" ref={createRef}>
               <Icon icon="material-symbols:add-box-rounded" onClick={onClickCreateMenu} />
               {showCreateMenu ? (
-                <div className="m-create-option__container flex">
+                <div className="create-option__container flex">
                   <Link to="/with/create" className="create-link__container">
                     윗미 생성
                   </Link>

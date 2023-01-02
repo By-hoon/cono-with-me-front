@@ -68,43 +68,40 @@ const SearchSong = ({ selectedSong, setSelectedSong }: SearchSongProps) => {
 
   return (
     <div className="search-song__container">
-      {selectedSong["id"] ? (
-        <div className="selected-song__container">
-          <div className="song-image__container">
-            <img src={selectedSong.albumImage} alt={selectedSong.title} className="song__image" />
-          </div>
-          <div className="song-title__container">
-            <span className="song-title__span">{selectedSong.title}</span>
-          </div>
-          <div className="song-artist__container">
-            <span className="song-artist__span">{selectedSong.artist}</span>
-          </div>
-        </div>
-      ) : null}
-      <form onSubmit={onSubmit}>
-        <input
-          placeholder="노래 제목을 입력하세요"
-          name="keyword"
-          className="search-song__input"
-          value={keyword}
-          onChange={onChangeKeyword}
-        />
-      </form>
+      <div className="search-song-input__container">
+        <form onSubmit={onSubmit}>
+          <input
+            placeholder="노래 제목을 입력하세요"
+            name="keyword"
+            className="search-song__input"
+            value={keyword}
+            onChange={onChangeKeyword}
+          />
+        </form>
+      </div>
       {loading ? (
-        <div className="songs-loading__container">
+        <div className="songs-loading__container flex">
           <Icon icon="eos-icons:loading" />
         </div>
       ) : null}
       <div className="songs__container">
-        {songs.map((song) => (
-          <div
-            className={`"song__container" ${selectedSong.id === song.id ? "selected-song" : null}`}
-            key={song.id}
-            onClick={() => selectSong(song)}
-          >
-            <Song id={song.id} title={song.title} artist={song.artist} albumImage={song.albumImage} />
-          </div>
-        ))}
+        {songs.map((song) => {
+          const isSelected = selectedSong.id === song.id;
+          return (
+            <div
+              className={`${isSelected ? "selected-song" : null}`}
+              key={song.id}
+              onClick={() => selectSong(song)}
+            >
+              {isSelected ? (
+                <div className="selected-icon__container">
+                  <Icon icon="material-symbols:check-circle" />
+                </div>
+              ) : null}
+              <Song id={song.id} title={song.title} artist={song.artist} albumImage={song.albumImage} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { sortOptions } from "../shared/Constants";
 import { LiveCardProps } from "../shared/Props";
 import { LivesData } from "../test/data";
 import LiveCard from "./LiveCard";
+import Title from "./Title";
 
 const Lives = () => {
   const [lives, setLives] = useState<Array<LiveCardProps>>();
@@ -36,7 +37,8 @@ const Lives = () => {
   }, []);
   return (
     <div className="lives__container flex">
-      <div className="lives-header__container">
+      <div className="lives-header__container flex">
+        <Title title={"라이브 목록"} />
         <div className="selected-sort-option flex" onClick={onClickSortOption} ref={sortOptionRef}>
           {selectedSortOption}
           <Icon icon="material-symbols:keyboard-arrow-down-rounded" />

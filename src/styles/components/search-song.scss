@@ -1,0 +1,45 @@
+.search-song__container {
+  padding: 10px;
+}
+
+.search-song-input__container {
+  @extend .header-search__container;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.search-song__input {
+  @extend .header-search__input;
+  max-width: none;
+}
+
+.songs-loading__container,
+.songs__container {
+  margin: 0 auto;
+}
+
+.songs-loading__container {
+  width: 100px;
+  justify-content: center;
+  font-size: 24px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.songs__container {
+  padding: 10px;
+  max-width: 780px;
+}
+
+.selected-song {
+  position: relative;
+  color: $base-color;
+}
+.selected-icon__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  color: $shadow-color;
+}

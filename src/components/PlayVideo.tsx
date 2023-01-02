@@ -21,8 +21,11 @@ const PlayVideo = ({ video }: VideoProps) => {
   }, []);
 
   return (
-    <div className="play-video__container">
+    <>
       <ReactPlayer
+        className="play-video__container"
+        width={"100%"}
+        height={"100%"}
         url={video?.url}
         ref={videoRef}
         playing={true}
@@ -30,18 +33,18 @@ const PlayVideo = ({ video }: VideoProps) => {
         playsinline={true}
         onProgress={(progress) => setCurrentTime(progress.playedSeconds)}
         onClick={controlMute}
-      />
+      ></ReactPlayer>
       <div className="video-seek__container">
         <input
           type="range"
           className="video-seek"
           min={0}
-          max={videoRef.current?.getDuration()}
+          max={String(Math.ceil(Number(videoRef.current?.getDuration())))}
           value={currentTime}
           onChange={onChangeCurrentTime}
         />
       </div>
-    </div>
+    </>
   );
 };
 

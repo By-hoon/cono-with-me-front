@@ -5,6 +5,7 @@ import { headcounts, PreferredGenre } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
+import Title from "./Title";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -86,6 +87,7 @@ export const CreateWithForm = () => {
 
   return (
     <div className="create-with__container">
+      <Title title={"윗미 생성"} />
       <form onSubmit={onSubmit}>
         <div className="title-input__container">
           <div className="flex">
@@ -176,7 +178,7 @@ export const CreateWithForm = () => {
 };
 
 export const CreateLiveForm = () => {
-  const [step, setStep] = useState("video");
+  const [step, setStep] = useState("content");
   const [videoFile, setVideoFile] = useState({});
   const [selectedSong, setSelectedSong] = useState<SongProps>({
     id: "",
@@ -272,29 +274,51 @@ export const CreateLiveForm = () => {
     }
     return null;
   };
+  const subTitleRender = () => {
+    switch (step) {
+      case "video": {
+        return <div className="create-sub-title">비디오 입력</div>;
+      }
+      case "song": {
+        return <div className="create-sub-title">노래 선택</div>;
+      }
+      case "content": {
+        return <div className="create-sub-title">내용 입력</div>;
+      }
+    }
+    return null;
+  };
   return (
-    <div className="create-with__container">
-      {step !== "video" ? (
-        <div className="back-button__container">
-          <button onClick={goBackStep}>
-            <Icon icon="bx:arrow-back" />
-          </button>
+    <div className="create-live__container">
+      <div className="create-live-header__container">
+        <div className="flex">
+          <Title title={"라이브 생성"} />
+          {subTitleRender()}
+          <div className="interaction-buttons__container flex">
+            {step !== "video" ? (
+              <div className="interaction-button__container">
+                <button className="interaction__button" onClick={goBackStep}>
+                  이전
+                </button>
+              </div>
+            ) : null}
+            {step !== "content" ? (
+              <div className={`interaction-button__container ${showNext ? null : "display-none"}`}>
+                <button className="interaction__button" onClick={goNextStep}>
+                  다음
+                </button>
+              </div>
+            ) : (
+              <div className="interaction-button__container">
+                <button className="interaction__button" onClick={createLive}>
+                  라이브 생성
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      ) : null}
+      </div>
       <div className="step__container">{stepRender()}</div>
-      {step !== "content" ? (
-        <div className={`"next-button__container" ${showNext ? null : "display-none"}`}>
-          <button className="next__button" onClick={goNextStep}>
-            다음
-          </button>
-        </div>
-      ) : (
-        <div className="submit-button__container">
-          <button className="submit__button" onClick={createLive}>
-            라이브 생성
-          </button>
-        </div>
-      )}
     </div>
   );
 };

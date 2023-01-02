@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { sortOptions } from "../shared/Constants";
 import { WithCardProps } from "../shared/Props";
 import { WithsData } from "../test/data";
+import Title from "./Title";
 import WithCard from "./WithCard";
 
 const Withs = () => {
@@ -36,6 +37,7 @@ const Withs = () => {
   }, []);
   return (
     <div className="withs__container flex">
+      <Title title={"윗미 목록"} />
       <div className="withs-header__container">
         <div className="selected-sort-option flex" onClick={onClickSortOption} ref={sortOptionRef}>
           {selectedSortOption}

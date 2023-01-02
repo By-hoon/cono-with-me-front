@@ -4,6 +4,7 @@ import { LiveData } from "../test/data";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
+import Title from "./Title";
 
 export const EditLiveForm = () => {
   const [title, setTitle] = useState("");
@@ -66,6 +67,7 @@ export const EditLiveForm = () => {
 
   return (
     <div className="edit__container">
+      <Title title={"라이브 수정"} />
       <div className="edit-upload-video__container">
         <div className="edit-header">
           <span className="edit__span">동영상 수정</span>

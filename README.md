@@ -27,6 +27,7 @@ src
 │   ├── Router.tsx
 │   ├── SearchSong.tsx
 │   ├── Song.tsx
+│   ├── Title.tsx
 │   ├── UploadVideo.tsx
 │   ├── WithCard.tsx
 │   └── Withs.tsx
@@ -43,7 +44,15 @@ src
 ├── styles
 │   ├── components
 │   │   ├── create-form.scss
-│   │   └── header.scss
+│   │   ├── header.scss
+│   │   ├── live-card.scss
+│   │   ├── live.scss
+│   │   ├── lives.scss
+│   │   ├── play-video.scss
+│   │   ├── search-song.scss
+│   │   ├── song.scss
+│   │   ├── title.scss
+│   │   └── upload-video.scss
 │   ├── config
 │   │   ├── _colors.scss
 │   │   ├── _fonts.scss
