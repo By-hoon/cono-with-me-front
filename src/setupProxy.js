@@ -10,4 +10,13 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    createProxyMiddleware("/gossing", {
+      target: "http://www.gossing-server.com:8081/api/v1",
+      pathRewrite: {
+        "^/gossing": "",
+      },
+      changeOrigin: true,
+    })
+  );
 };
