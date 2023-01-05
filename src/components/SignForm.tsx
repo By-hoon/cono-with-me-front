@@ -97,3 +97,65 @@ export const SignUpForm = () => {
     </div>
   );
 };
+
+export const SignInForm = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const changeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setId(e.target.value);
+  }, []);
+  const changePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  }, []);
+
+  const login = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    axios
+      .post("/gossing/auth/login", {
+        email: id,
+        password,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <div className="sign-in-form__container">
+      <Title title={"로그인"} />
+      <form onSubmit={login}>
+        <div className="id-input__container">
+          <div className="flex">
+            <div className="input-title__container">아이디(이메일)</div>
+            <input
+              type="text"
+              value={id}
+              placeholder="아이디를 입력해 주세요."
+              onChange={changeId}
+              required
+            />
+          </div>
+        </div>
+        <div className="password-input__container">
+          <div className="flex">
+            <div className="input-title__container">비밀번호</div>
+            <input
+              type="password"
+              value={password}
+              placeholder="비밀번호를 입력해 주세요."
+              onChange={changePassword}
+              required
+            />
+          </div>
+        </div>
+        <div className="submit__container">
+          <input type="submit" value="로그인" />
+        </div>
+      </form>
+    </div>
+  );
+};
