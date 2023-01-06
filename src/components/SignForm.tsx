@@ -1,5 +1,7 @@
 import axios from "axios";
+import moment from "moment";
 import { useCallback, useState } from "react";
+import { Cookies } from "react-cookie";
 import Title from "./Title";
 
 export const SignUpForm = () => {
@@ -102,6 +104,8 @@ export const SignInForm = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
+  const cookies = new Cookies();
+
   const changeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
   }, []);
@@ -117,7 +121,11 @@ export const SignInForm = () => {
         password,
       })
       .then((res) => {
-        console.log(res.data);
+        cookies.set("refreshToken", res.data.refreshToken, {
+          secure: true,
+        });
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("expiresAt", moment().add(20, "minute").format("yyyy-MM-DD HH:mm:ss"));
       })
       .catch((error) => {
         console.log(error);
@@ -156,6 +164,30 @@ export const SignInForm = () => {
           <input type="submit" value="로그인" />
         </div>
       </form>
+      <button
+        onClick={() => {
+          console.log(cookies.get("refreshToken"));
+          cookies.remove("refreshToken");
+          const expireAt = localStorage.getItem("expiresAt");
+          let token = localStorage.getItem("accessToken");
+          console.log(token, expireAt);
+        }}
+      >
+        dd
+      </button>
+      <button
+        onClick={() => {
+          cookies.set(
+            "refreshToken",
+            "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NzM2MDk3OTN9.zMTYDB0OqHzbzKvJKWWc4QTuwEDMeot8gJjMqGImBonBKPdY60_PkjU7705cQZOhsLVyU48iSHasLWEMKwwXwg",
+            {
+              secure: true,
+            }
+          );
+        }}
+      >
+        cook
+      </button>
     </div>
   );
 };
