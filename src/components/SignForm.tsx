@@ -101,7 +101,11 @@ export const SignUpForm = () => {
   );
 };
 
-export const SignInForm = () => {
+interface SignInProps {
+  setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const SignInForm = ({ setIsSignIn }: SignInProps) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
@@ -128,6 +132,7 @@ export const SignInForm = () => {
         });
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("expiresAt", moment().add(20, "minute").format("yyyy-MM-DD HH:mm:ss"));
+        setIsSignIn(true);
       })
       .catch((error) => {
         console.log(error);
