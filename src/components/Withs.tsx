@@ -1,5 +1,7 @@
 import { Icon } from "@iconify/react";
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import mainApi from "../apis/mainApi";
 import { sortOptions } from "../shared/Constants";
 import { WithCardProps } from "../shared/Props";
 import { WithsData } from "../test/data";
@@ -7,7 +9,7 @@ import Title from "./Title";
 import WithCard from "./WithCard";
 
 const Withs = () => {
-  const [withs, setWiths] = useState<Array<WithCardProps>>();
+  const [withs, setWiths] = useState<Array<WithCardProps>>([]);
   const [selectedSortOption, setSelectedSortOption] = useState("정렬 없음");
   const [showSortOption, setShowSortOption] = useState(false);
 
@@ -33,7 +35,11 @@ const Withs = () => {
     };
   });
   useEffect(() => {
-    setWiths(WithsData);
+    mainApi.get(`/recruitments?page=0&size=7`, {}).then((res) => {
+      const response = res.data;
+      console.log(response);
+      setWiths(withs.concat(response.recruitmentDto));
+    });
   }, []);
   return (
     <div className="withs__container flex">
@@ -53,7 +59,7 @@ const Withs = () => {
           </div>
         ) : null}
       </div>
-      {withs?.map((w) => (
+      {withs.map((w) => (
         <WithCard
           key={w.id}
           id={w.id}
