@@ -56,6 +56,7 @@ const Router = () => {
             <Route path="/live/edit" element={<EditLive />} />
             <Route path="/live/list" element={<LiveList />} />
             <Route path="/live/play" element={<PlayLive />} />
+            <Route path="/with/*" element={<Navigate replace to="/with/list" />} />
             <Route path="/live/*" element={<Navigate replace to="/live/list" />} />
           </Routes>
         </>
