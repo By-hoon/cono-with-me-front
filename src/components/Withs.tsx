@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import mainApi from "../apis/mainApi";
 import { sortOptions } from "../shared/Constants";
 import { WithCardProps } from "../shared/Props";
-import { WithsData } from "../test/data";
 import Title from "./Title";
 import WithCard from "./WithCard";
 
