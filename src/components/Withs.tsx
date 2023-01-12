@@ -1,14 +1,15 @@
 import { Icon } from "@iconify/react";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import { isBrowser } from "react-device-detect";
 import mainApi from "../apis/mainApi";
-import { sortOptions } from "../shared/Constants";
+import { sortOptions, withsSize } from "../shared/Constants";
 import { WithCardProps } from "../shared/Props";
 import Title from "./Title";
 import WithCard from "./WithCard";
 
 const Withs = () => {
   const [withs, setWiths] = useState<Array<WithCardProps>>([]);
+  const [page, setPage] = useState(0);
   const [selectedSortOption, setSelectedSortOption] = useState("정렬 없음");
   const [showSortOption, setShowSortOption] = useState(false);
 
@@ -34,11 +35,12 @@ const Withs = () => {
     };
   });
   useEffect(() => {
-    mainApi.get(`/recruitments?page=0&size=7`, {}).then((res) => {
-      const response = res.data;
-      console.log(response);
-      setWiths(withs.concat(response.recruitmentDto));
-    });
+    mainApi
+      .get(`/recruitments?page=${page}&size=${isBrowser ? withsSize.browser : withsSize.mobile}`, {})
+      .then((res) => {
+        const response = res.data;
+        setWiths(withs.concat(response.recruitmentDto));
+      });
   }, []);
   return (
     <div className="withs__container flex">
