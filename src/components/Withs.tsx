@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
 import mainApi from "../apis/mainApi";
 import { sortOptions, withsSize } from "../shared/Constants";
-import { WithCardProps } from "../shared/Props";
+import { WithProps } from "../shared/Props";
 import Title from "./Title";
 import WithCard from "./WithCard";
 
 const Withs = () => {
-  const [withs, setWiths] = useState<Array<WithCardProps>>([]);
+  const [withs, setWiths] = useState<Array<WithProps>>([]);
   const [page, setPage] = useState(0);
   const [selectedSortOption, setSelectedSortOption] = useState("정렬 없음");
   const [showSortOption, setShowSortOption] = useState(false);
@@ -34,6 +34,7 @@ const Withs = () => {
       document.removeEventListener("click", onClickOutSide);
     };
   });
+
   useEffect(() => {
     mainApi
       .get(`/recruitments?page=${page}&size=${isBrowser ? withsSize.browser : withsSize.mobile}`, {})
@@ -41,7 +42,8 @@ const Withs = () => {
         const response = res.data;
         setWiths(withs.concat(response.recruitmentDto));
       });
-  }, []);
+  }, [page]);
+
   return (
     <div className="withs__container flex">
       <Title title={"윗미 목록"} />
@@ -61,14 +63,7 @@ const Withs = () => {
         ) : null}
       </div>
       {withs.map((w) => (
-        <WithCard
-          key={w.id}
-          id={w.id}
-          title={w.title}
-          time={w.time}
-          place={w.place}
-          preferredGenres={w.preferredGenres}
-        />
+        <WithCard key={w.id} w={w} />
       ))}
     </div>
   );

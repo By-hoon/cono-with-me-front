@@ -5,12 +5,16 @@ export interface SongProps {
   albumImage?: string;
 }
 
-export interface WithCardProps {
-  id: string;
+export interface WithProps {
+  id: number;
+  userId: number;
   title: string;
-  time: string;
+  content: string;
+  startedAt: string;
+  expiredAt: string;
   place: string;
-  preferredGenres: Array<string>;
+  participant: number;
+  genre: string;
 }
 
 export interface LiveProps {
