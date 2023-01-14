@@ -65,8 +65,8 @@ const Withs = () => {
 
   return (
     <div className="withs__container flex">
-      <Title title={"윗미 목록"} />
-      <div className="withs-header__container">
+      <div className="withs-header__container flex">
+        <Title title={"윗미 목록"} />
         <div className="selected-sort-option flex" onClick={onClickSortOption} ref={sortOptionRef}>
           {selectedSortOption}
           <Icon icon="material-symbols:keyboard-arrow-down-rounded" />
