@@ -18,7 +18,7 @@ const WithCard = ({ w, setLastWith }: WithCardProps) => {
       ref={setLastWith}
       className="with__link"
     >
-      <div className="with-card__container">
+      <div className="with-card__container flex">
         <div className="with-title__container">{w.title}</div>
         <div className="flex">
           <div className="with-time__container">{w.expiredAt}</div>
