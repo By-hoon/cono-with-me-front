@@ -2,6 +2,11 @@ export const headcounts: Array<number> = [1, 2, 3];
 
 export const sortOptions: Array<string> = ["정렬 없음", "최신순 정렬"];
 
+export const withsSize = {
+  browser: 20,
+  mobile: 10,
+};
+
 export const PreferredGenre: { [key: string]: boolean } = {
   "모든 장르": true,
   발라드: false,
