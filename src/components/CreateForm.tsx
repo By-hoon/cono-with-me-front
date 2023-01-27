@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { headcounts, PreferredGenre } from "../shared/Constants";
+import { headcounts, genres } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
@@ -18,7 +18,7 @@ export const CreateWithForm = () => {
   );
   const [place, setPlace] = useState("");
   const [headcount, setHeadcount] = useState(1);
-  const [preferredGenre, setPreferredGenre] = useState(PreferredGenre);
+  const [preferredGenre, setPreferredGenre] = useState("BALLAD");
 
   const navigate = useNavigate();
   const startTimeFocus = useRef<HTMLInputElement>(null);
@@ -43,16 +43,7 @@ export const CreateWithForm = () => {
     setHeadcount(option);
   };
   const selectPreferredGenre = (option: string) => {
-    let newPreferredGenre = JSON.parse(JSON.stringify(preferredGenre));
-    if (option !== "모든 장르") {
-      newPreferredGenre["모든 장르"] = false;
-      newPreferredGenre[option] = !newPreferredGenre[option];
-      if (!newPreferredGenre[option]) {
-        if (!Object.keys(newPreferredGenre).filter((key) => newPreferredGenre[key]).length)
-          newPreferredGenre["모든 장르"] = true;
-      }
-    } else if (!newPreferredGenre["모든 장르"]) newPreferredGenre = PreferredGenre;
-    setPreferredGenre(newPreferredGenre);
+    setPreferredGenre(option);
   };
   const convertTime = (time: string) => {
     const timeSplit = time.split(":");
@@ -152,18 +143,16 @@ export const CreateWithForm = () => {
           <div className="flex">
             <div className="input-title__container">선호 장르</div>
             <div className="create-option__container">
-              {Object.keys(PreferredGenre).map((preferredGenreOption) => (
+              {genres.map((genre) => (
                 <button
-                  key={preferredGenreOption}
+                  key={genre}
                   className={`${
-                    preferredGenre[preferredGenreOption]
-                      ? "create-option__button--clicked"
-                      : "create-option__button"
+                    preferredGenre === genre ? "create-option__button--clicked" : "create-option__button"
                   }`}
                   type="button"
-                  onClick={() => selectPreferredGenre(preferredGenreOption)}
+                  onClick={() => selectPreferredGenre(genre)}
                 >
-                  {preferredGenreOption}
+                  {genre}
                 </button>
               ))}
             </div>

@@ -7,18 +7,22 @@ export const withsSize = {
   mobile: 10,
 };
 
-export const PreferredGenre: { [key: string]: boolean } = {
-  "모든 장르": true,
-  발라드: false,
-  댄스: false,
-  "랩/힙합": false,
-  인디: false,
-  "R&B": false,
-  락: false,
-  트로트: false,
-  팝송: false,
-  그외: false,
-};
+export const genres: Array<string> = [
+  "BALLAD",
+  "HIPHOP",
+  "MUSICAL",
+  "ROCK",
+  // "모든 장르",
+  // "발라드",
+  // "댄스",
+  // "랩/힙합",
+  // "인디",
+  // "R&B",
+  // "락",
+  // "트로트",
+  // "팝송",
+  // "그외",
+];
 
 export const maniadbBaseUrl = (keyword: string, sr: "artist" | "album" | "song") => {
   return `/maniadb/${keyword}/?sr=${sr}&display=10&key=example&v=0.5`;
