@@ -6,6 +6,7 @@ import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
 import Title from "./Title";
+import mainApi from "../apis/mainApi";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -71,8 +72,27 @@ export const CreateWithForm = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isValidTime()) {
-      //axios 이용한 post
-      navigate("/");
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = (today.getMonth() + 1).toString().padStart(2, "0");
+      const date = today.getDate().toString().padStart(2, "0");
+      mainApi
+        .post(`/recruitments`, {
+          title,
+          content,
+          startedAt: `${year}-${month}-${date}T${startTime}`,
+          expiredAt: `${year}-${month}-${date}T${endTime}`,
+          place,
+          participant: headcount,
+          genre: preferredGenre,
+        })
+        .then((res) => {
+          alert("윗미가 생성되었습니다.");
+          navigate("/with");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
