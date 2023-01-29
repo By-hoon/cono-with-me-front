@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Icon } from "@iconify/react";
 import { headcounts, genres } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
@@ -11,19 +10,19 @@ import mainApi from "../apis/mainApi";
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [startTime, setStartTime] = useState(
-    new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(11, 16)
+  const [withTime, setWithTime] = useState(
+    new Date(Date.now() - new Date().getTimezoneOffset() * 60200).toISOString().slice(11, 16)
   );
-  const [endTime, setEndTime] = useState(
-    new Date(Date.now() - new Date().getTimezoneOffset() * 63350).toISOString().slice(11, 16)
+  const [expireTime, setExpireTime] = useState(
+    new Date(Date.now() - new Date().getTimezoneOffset() * 60100).toISOString().slice(11, 16)
   );
   const [place, setPlace] = useState("");
   const [headcount, setHeadcount] = useState(1);
   const [preferredGenre, setPreferredGenre] = useState("BALLAD");
 
   const navigate = useNavigate();
-  const startTimeFocus = useRef<HTMLInputElement>(null);
-  const endTimeFocus = useRef<HTMLInputElement>(null);
+  const withTimeFocus = useRef<HTMLInputElement>(null);
+  const expireTimeFocus = useRef<HTMLInputElement>(null);
 
   const changeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -31,11 +30,11 @@ export const CreateWithForm = () => {
   const changeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   }, []);
-  const changeStartTime = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setStartTime(e.target.value);
+  const changeWithTime = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setWithTime(e.target.value);
   }, []);
-  const changeEndTime = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setEndTime(e.target.value);
+  const changeExpireTime = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpireTime(e.target.value);
   }, []);
   const changePlace = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setPlace(e.target.value);
@@ -57,15 +56,19 @@ export const CreateWithForm = () => {
       .toISOString()
       .slice(11, 16);
     const convertCurrentTime = convertTime(currentTime);
-    const convertStartTime = convertTime(startTime);
-    const convertEndTime = convertTime(endTime);
-    if (convertCurrentTime > convertStartTime) {
-      startTimeFocus.current?.focus();
-      alert(`시작 시간은 현재 시간보다 작을 수 없습니다. 현재시간: ${currentTime}`);
+    const convertWithTime = convertTime(withTime);
+    const convertExpireTime = convertTime(expireTime);
+    if (convertCurrentTime >= convertWithTime) {
+      withTimeFocus.current?.focus();
+      alert(`윗미 시간은 현재 시간보다 빠르거나 같을 수 없습니다. 현재시간: ${currentTime}`);
       return false;
-    } else if (convertStartTime >= convertEndTime) {
-      endTimeFocus.current?.focus();
-      alert(`종료 시간은 시작 시간보다 작을 수 없습니다.`);
+    } else if (convertWithTime <= convertExpireTime) {
+      expireTimeFocus.current?.focus();
+      alert(`만료 시간은 윗미 시간보다 늦거나 같을 수 없습니다.`);
+      return false;
+    } else if (convertCurrentTime >= convertExpireTime) {
+      expireTimeFocus.current?.focus();
+      alert(`만료 시간은 현재 시간보다 빠르거나 같을 수 없습니다.`);
       return false;
     } else return true;
   };
@@ -80,8 +83,8 @@ export const CreateWithForm = () => {
         .post(`/recruitments`, {
           title,
           content,
-          startedAt: `${year}-${month}-${date}T${startTime}`,
-          expiredAt: `${year}-${month}-${date}T${endTime}`,
+          startedAt: `${year}-${month}-${date}T${withTime}`,
+          expiredAt: `${year}-${month}-${date}T${expireTime}`,
           place,
           participant: headcount,
           genre: preferredGenre,
@@ -120,12 +123,18 @@ export const CreateWithForm = () => {
         </div>
         <div className="time-input__container">
           <div className="flex">
-            <div className="input-title__container">시작 시간</div>
-            <input type="time" value={startTime} onChange={changeStartTime} required ref={startTimeFocus} />
+            <div className="input-title__container">윗미 시간</div>
+            <input type="time" value={withTime} onChange={changeWithTime} required ref={withTimeFocus} />
           </div>
           <div className="flex">
-            <div className="input-title__container">종료 시간</div>
-            <input type="time" value={endTime} onChange={changeEndTime} required ref={endTimeFocus} />
+            <div className="input-title__container">만료 시간</div>
+            <input
+              type="time"
+              value={expireTime}
+              onChange={changeExpireTime}
+              required
+              ref={expireTimeFocus}
+            />
           </div>
         </div>
         <div className="place-input__container">
