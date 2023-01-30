@@ -24,6 +24,18 @@ export const genres: Array<string> = [
   // "그외",
 ];
 
+export const SUCCESS = {
+  CREATEWITH: "윗미가 생성되었습니다.",
+};
+
+export const ERROR = {
+  CREATE: {
+    EARLYWITHTIME: "윗미 시간은 현재 시간보다 빠르거나 같을 수 없습니다. 현재시간:",
+    LATEEXPIRETIME: "만료 시간은 윗미 시간보다 늦거나 같을 수 없습니다.",
+    EARLYEXPIRETIME: "만료 시간은 현재 시간보다 빠르거나 같을 수 없습니다.",
+  },
+};
+
 export const maniadbBaseUrl = (keyword: string, sr: "artist" | "album" | "song") => {
   return `/maniadb/${keyword}/?sr=${sr}&display=10&key=example&v=0.5`;
 };

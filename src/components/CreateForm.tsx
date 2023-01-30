@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { headcounts, genres } from "../shared/Constants";
+import { headcounts, genres, ERROR, SUCCESS } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
@@ -60,15 +60,15 @@ export const CreateWithForm = () => {
     const convertExpireTime = convertTime(expireTime);
     if (convertCurrentTime >= convertWithTime) {
       withTimeFocus.current?.focus();
-      alert(`윗미 시간은 현재 시간보다 빠르거나 같을 수 없습니다. 현재시간: ${currentTime}`);
+      alert(`${ERROR.CREATE.EARLYWITHTIME} ${currentTime}`);
       return false;
     } else if (convertWithTime <= convertExpireTime) {
       expireTimeFocus.current?.focus();
-      alert(`만료 시간은 윗미 시간보다 늦거나 같을 수 없습니다.`);
+      alert(`${ERROR.CREATE.LATEEXPIRETIME}`);
       return false;
     } else if (convertCurrentTime >= convertExpireTime) {
       expireTimeFocus.current?.focus();
-      alert(`만료 시간은 현재 시간보다 빠르거나 같을 수 없습니다.`);
+      alert(`${ERROR.CREATE.EARLYEXPIRETIME}`);
       return false;
     } else return true;
   };
@@ -90,7 +90,7 @@ export const CreateWithForm = () => {
           genre: preferredGenre,
         })
         .then((res) => {
-          alert("윗미가 생성되었습니다.");
+          alert(SUCCESS.CREATEWITH);
           navigate("/with");
         })
         .catch((error) => {
