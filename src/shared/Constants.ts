@@ -24,6 +24,11 @@ export const genres: Array<string> = [
   // "그외",
 ];
 
+export const HELP = {
+  WITHTiME: "만날 시간을 입력해 주세요.",
+  EXPIRETIME: "윗미를 언제까지 게시할지 입력해 주세요.",
+};
+
 export const SUCCESS = {
   CREATEWITH: "윗미가 생성되었습니다.",
 };

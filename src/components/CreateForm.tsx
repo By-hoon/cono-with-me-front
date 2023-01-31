@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { headcounts, genres, ERROR, SUCCESS } from "../shared/Constants";
+import { headcounts, genres, ERROR, SUCCESS, HELP } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./SearchSong";
 import { SongProps } from "../shared/Props";
 import Title from "./Title";
 import mainApi from "../apis/mainApi";
+import Help from "./Help";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");
@@ -123,11 +124,18 @@ export const CreateWithForm = () => {
         </div>
         <div className="time-input__container">
           <div className="flex">
-            <div className="input-title__container">윗미 시간</div>
+            <div className="flex">
+              <div className="input-title__container">윗미 시간</div>
+              <Help>{HELP.WITHTiME}</Help>
+            </div>
+
             <input type="time" value={withTime} onChange={changeWithTime} required ref={withTimeFocus} />
           </div>
           <div className="flex">
-            <div className="input-title__container">만료 시간</div>
+            <div className="flex">
+              <div className="input-title__container">만료 시간</div>
+              <Help>{HELP.EXPIRETIME}</Help>
+            </div>
             <input
               type="time"
               value={expireTime}
