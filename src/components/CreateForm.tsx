@@ -139,6 +139,9 @@ export const CreateWithForm = () => {
               onChange={changeWithTime}
               required
               ref={withTimeFocus}
+              onClick={(e) => {
+                e.currentTarget.showPicker();
+              }}
             />
           </div>
           <div className="flex">
@@ -152,6 +155,9 @@ export const CreateWithForm = () => {
               onChange={changeExpireTime}
               required
               ref={expireTimeFocus}
+              onClick={(e) => {
+                e.currentTarget.showPicker();
+              }}
             />
           </div>
         </div>
