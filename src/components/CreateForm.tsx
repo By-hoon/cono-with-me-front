@@ -102,41 +102,51 @@ export const CreateWithForm = () => {
 
   return (
     <div className="create-with__container">
-      <Title title={"윗미 생성"} />
+      <div className="create-with-header__container flex">
+        <Title title={"윗미 생성"} />
+      </div>
       <form onSubmit={onSubmit}>
         <div className="title-input__container">
-          <div className="flex">
-            <div className="input-title__container">제목</div>
-            <input
-              type="text"
-              value={title}
-              placeholder="제목을 입력해 주세요."
-              onChange={changeTitle}
-              required
-            />
-          </div>
+          <div className="input-title">제목</div>
+          <input
+            className="title__input"
+            type="text"
+            value={title}
+            placeholder="제목을 입력해 주세요."
+            onChange={changeTitle}
+            required
+          />
         </div>
         <div className="content-input__container">
-          <div className="flex">
-            <div className="input-title__container">내용</div>
-            <textarea placeholder="내용을 입력해 주세요." value={content} onChange={changeContent} required />
-          </div>
+          <div className="input-title">내용</div>
+          <textarea
+            className="content__input"
+            placeholder="내용을 입력해 주세요."
+            value={content}
+            onChange={changeContent}
+            required
+          />
         </div>
-        <div className="time-input__container">
+        <div className="time-input__container flex">
           <div className="flex">
-            <div className="flex">
-              <div className="input-title__container">윗미 시간</div>
-              <Help>{HELP.WITHTiME}</Help>
-            </div>
-
-            <input type="time" value={withTime} onChange={changeWithTime} required ref={withTimeFocus} />
-          </div>
-          <div className="flex">
-            <div className="flex">
-              <div className="input-title__container">만료 시간</div>
-              <Help>{HELP.EXPIRETIME}</Help>
+            <div className="input-title flex">
+              윗미 시간 <Help>{HELP.WITHTiME}</Help>
             </div>
             <input
+              className="time__input"
+              type="time"
+              value={withTime}
+              onChange={changeWithTime}
+              required
+              ref={withTimeFocus}
+            />
+          </div>
+          <div className="flex">
+            <div className="input-title flex">
+              만료 시간 <Help>{HELP.EXPIRETIME}</Help>
+            </div>
+            <input
+              className="time__input"
               type="time"
               value={expireTime}
               onChange={changeExpireTime}
@@ -146,53 +156,48 @@ export const CreateWithForm = () => {
           </div>
         </div>
         <div className="place-input__container">
-          <div className="flex">
-            <div className="input-title__container">장소</div>
-            <input
-              type="text"
-              value={place}
-              placeholder="장소를 입력해 주세요."
-              onChange={changePlace}
-              required
-            />
-          </div>
+          <div className="input-title">장소</div>
+          <input
+            className="place__input"
+            type="text"
+            value={place}
+            placeholder="장소를 입력해 주세요."
+            onChange={changePlace}
+            required
+          />
         </div>
         <div className="headcount-input__container">
-          <div className="flex">
-            <div className="input-title__container">구할 인원</div>
-            <div className="create-option__container">
-              {headcounts.map((headcountOption) => (
-                <button
-                  key={headcountOption}
-                  className={`${
-                    headcount === headcountOption ? "create-option__button--clicked" : "create-option__button"
-                  }`}
-                  type="button"
-                  onClick={() => changeHeadcount(headcountOption)}
-                >
-                  {headcountOption}명
-                </button>
-              ))}
-            </div>
+          <div className="input-title">구할 인원</div>
+          <div className="headcount-option__container">
+            {headcounts.map((headcountOption) => (
+              <button
+                key={headcountOption}
+                className={`${
+                  headcount === headcountOption ? "headcount__button--clicked" : "headcount__button"
+                }`}
+                type="button"
+                onClick={() => changeHeadcount(headcountOption)}
+              >
+                {headcountOption}명
+              </button>
+            ))}
           </div>
         </div>
         <div className="preferred-genre-input__container">
-          <div className="flex">
-            <div className="input-title__container">선호 장르</div>
-            <div className="create-option__container">
-              {genres.map((genre) => (
-                <button
-                  key={genre}
-                  className={`${
-                    preferredGenre === genre ? "create-option__button--clicked" : "create-option__button"
-                  }`}
-                  type="button"
-                  onClick={() => selectPreferredGenre(genre)}
-                >
-                  {genre}
-                </button>
-              ))}
-            </div>
+          <div className="input-title">선호 장르</div>
+          <div className="preferred-genre-option__container">
+            {genres.map((genre) => (
+              <button
+                key={genre}
+                className={`${
+                  preferredGenre === genre ? "preferred-genre__button--clicked" : "preferred-genre__button"
+                }`}
+                type="button"
+                onClick={() => selectPreferredGenre(genre)}
+              >
+                {genre}
+              </button>
+            ))}
           </div>
         </div>
         <div className="submit__container">
