@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/cono-with-me-front/static/css/main.9b233d0d.css",
-    "main.js": "/cono-with-me-front/static/js/main.d0039b30.js",
+    "main.js": "/cono-with-me-front/static/js/main.a6be1942.js",
     "index.html": "/cono-with-me-front/index.html",
     "main.9b233d0d.css.map": "/cono-with-me-front/static/css/main.9b233d0d.css.map",
-    "main.d0039b30.js.map": "/cono-with-me-front/static/js/main.d0039b30.js.map"
+    "main.a6be1942.js.map": "/cono-with-me-front/static/js/main.a6be1942.js.map"
   },
   "entrypoints": [
     "static/css/main.9b233d0d.css",
-    "static/js/main.d0039b30.js"
+    "static/js/main.a6be1942.js"
   ]
 }
