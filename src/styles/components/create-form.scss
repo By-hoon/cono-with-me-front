@@ -77,15 +77,45 @@
 .headcount-input__container,
 .preferred-genre-input__container {
   @extend .title-input__container;
+  button{
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 2px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+  }
 }
 
+.headcount__button, 
+.preferred-genre__button{
+  color: $dull-color;
+  border: 1px solid $dull-color; 
+  &:hover{
+    background-color: lighten(#f1f2f6, 1%);
+  }
+}
 .headcount__button--clicked,
 .preferred-genre__button--clicked {
-  color: blue;
+  color: $base-color;
+  border: 1px solid $base-color; 
 }
 
 .submit__container {
   text-align: center;
+  margin-bottom: 20px;
+  input{
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 10px 16px;
+    color: #ffffff;
+    background-color: $base-color;
+    &:hover{
+      background-color: darken($base-color, 10%);
+    }
+  }
 }
 
 /* 라이브 */
