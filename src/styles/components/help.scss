@@ -1,0 +1,21 @@
+.help__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 3px;
+    svg{
+        font-size: 17px;
+        cursor: pointer;
+    }
+}
+
+.help-message{
+    position: absolute;
+    top:100%;
+    right: 3px;
+    font-size: 15px;
+    padding: 7px;
+    border: 1px solid $dull-color;
+    background-color: lighten(#f1f2f6, 1%);
+    z-index: 2;
+}

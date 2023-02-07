@@ -23,6 +23,7 @@ src
 │   ├── CreateForm.tsx
 │   ├── EditForm.tsx
 │   ├── Header.tsx
+│   ├── Help.tsx
 │   ├── Live.tsx
 │   ├── LiveCard.tsx
 │   ├── Lives.tsx
@@ -51,6 +52,7 @@ src
 │   ├── components
 │   │   ├── create-form.scss
 │   │   ├── header.scss
+│   │   ├── help.scss
 │   │   ├── live-card.scss
 │   │   ├── live.scss
 │   │   ├── lives.scss
@@ -58,7 +60,9 @@ src
 │   │   ├── search-song.scss
 │   │   ├── song.scss
 │   │   ├── title.scss
-│   │   └── upload-video.scss
+│   │   ├── upload-video.scss
+│   │   ├── with-card.scss
+│   │   └── withs.scss
 │   ├── config
 │   │   ├── _colors.scss
 │   │   ├── _fonts.scss
