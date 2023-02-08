@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
 import mainApi from "../apis/mainApi";
+import usePageObserver from "../hooks/usePageObserver";
 import { sortOptions, withsSize } from "../shared/Constants";
 import { WithProps } from "../shared/Props";
 import Title from "./Title";
@@ -9,21 +10,11 @@ import WithCard from "./WithCard";
 
 const Withs = () => {
   const [withs, setWiths] = useState<Array<WithProps>>([]);
-  const [page, setPage] = useState(0);
-  const [lastWith, setLastWith] = useState<HTMLAnchorElement | null>();
+  const { page, setLast: setLastWith } = usePageObserver();
   const [selectedSortOption, setSelectedSortOption] = useState("정렬 없음");
   const [showSortOption, setShowSortOption] = useState(false);
 
   const sortOptionRef = useRef<HTMLInputElement>(null);
-
-  const onIntersect: IntersectionObserverCallback = (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setPage(page + 1);
-        observer.unobserve(entry.target);
-      }
-    });
-  };
 
   const changeSortOption = (option: string) => {
     setSelectedSortOption(option);
@@ -44,15 +35,6 @@ const Withs = () => {
       document.removeEventListener("click", onClickOutSide);
     };
   });
-
-  useEffect(() => {
-    let observer: IntersectionObserver;
-    if (lastWith) {
-      observer = new IntersectionObserver(onIntersect, { threshold: 0.5 });
-      observer.observe(lastWith);
-    }
-    return () => observer && observer.disconnect();
-  }, [lastWith]);
 
   useEffect(() => {
     mainApi
