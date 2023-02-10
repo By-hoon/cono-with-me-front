@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
+import useControlRenderingByClick from "../hooks/useControlRenderingByClick";
 import { sortOptions } from "../shared/Constants";
 import { LiveCardProps } from "../shared/Props";
 import { LivesData } from "../test/data";
@@ -9,29 +10,16 @@ import Title from "./Title";
 const Lives = () => {
   const [lives, setLives] = useState<Array<LiveCardProps>>();
   const [selectedSortOption, setSelectedSortOption] = useState("정렬 없음");
-  const [showSortOption, setShowSortOption] = useState(false);
-
-  const sortOptionRef = useRef<HTMLInputElement>(null);
+  const {
+    show: showSortOption,
+    ref: sortOptionRef,
+    onClickTarget: onClickSortOption,
+  } = useControlRenderingByClick();
 
   const changeSortOption = (option: string) => {
     setSelectedSortOption(option);
   };
 
-  const onClickSortOption = () => {
-    setShowSortOption((show) => !show);
-  };
-  const onClickOutSide = (e: any) => {
-    if (showSortOption && sortOptionRef.current && !sortOptionRef.current.contains(e.target)) {
-      setShowSortOption(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", onClickOutSide);
-    return () => {
-      document.removeEventListener("click", onClickOutSide);
-    };
-  });
   useEffect(() => {
     setLives(LivesData);
   }, []);

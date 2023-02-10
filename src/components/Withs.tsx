@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
 import mainApi from "../apis/mainApi";
+import useControlRenderingByClick from "../hooks/useControlRenderingByClick";
 import usePageObserver from "../hooks/usePageObserver";
 import { sortOptions, withsSize } from "../shared/Constants";
 import { WithProps } from "../shared/Props";
@@ -11,30 +12,16 @@ import WithCard from "./WithCard";
 const Withs = () => {
   const [withs, setWiths] = useState<Array<WithProps>>([]);
   const { page, setLast: setLastWith } = usePageObserver();
+  const {
+    show: showSortOption,
+    ref: sortOptionRef,
+    onClickTarget: onClickSortOption,
+  } = useControlRenderingByClick();
   const [selectedSortOption, setSelectedSortOption] = useState("정렬 없음");
-  const [showSortOption, setShowSortOption] = useState(false);
-
-  const sortOptionRef = useRef<HTMLInputElement>(null);
 
   const changeSortOption = (option: string) => {
     setSelectedSortOption(option);
   };
-
-  const onClickSortOption = () => {
-    setShowSortOption((show) => !show);
-  };
-  const onClickOutSide = (e: any) => {
-    if (showSortOption && sortOptionRef.current && !sortOptionRef.current.contains(e.target)) {
-      setShowSortOption(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", onClickOutSide);
-    return () => {
-      document.removeEventListener("click", onClickOutSide);
-    };
-  });
 
   useEffect(() => {
     mainApi
