@@ -1,11 +1,11 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
-import useControlRenderingByClick from "../hooks/useControlRenderingByClick";
-import { sortOptions } from "../shared/Constants";
-import { LiveCardProps } from "../shared/Props";
-import { LivesData } from "../test/data";
+import useControlRenderingByClick from "../../hooks/useControlRenderingByClick";
+import { sortOptions } from "../../shared/Constants";
+import { LiveCardProps } from "../../shared/Props";
+import { LivesData } from "../../test/data";
 import LiveCard from "./LiveCard";
-import Title from "./Title";
+import Title from "../common/Title";
 
 const Lives = () => {
   const [lives, setLives] = useState<Array<LiveCardProps>>();

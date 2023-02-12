@@ -1,4 +1,4 @@
-import Withs from "../components/Withs";
+import Withs from "../components/with/Withs";
 
 const WithList = () => {
   return <Withs />;

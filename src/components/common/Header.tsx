@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
 import { Link, useLocation } from "react-router-dom";
-import useControlRenderingByClick from "../hooks/useControlRenderingByClick";
+import useControlRenderingByClick from "../../hooks/useControlRenderingByClick";
 
 interface DetailHeaderProps {
   title: string;

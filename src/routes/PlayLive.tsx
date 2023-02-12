@@ -1,4 +1,4 @@
-import Live from "../components/Live";
+import Live from "../components/live/Live";
 
 const PlayLive = () => {
   return <Live />;

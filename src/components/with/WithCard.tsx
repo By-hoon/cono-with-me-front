@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
-import { WithProps } from "../shared/Props";
+import { WithProps } from "../../shared/Props";
 
 interface WithCardProps {
   w: WithProps;

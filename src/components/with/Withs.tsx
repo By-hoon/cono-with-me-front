@@ -1,12 +1,12 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
-import mainApi from "../apis/mainApi";
-import useControlRenderingByClick from "../hooks/useControlRenderingByClick";
-import usePageObserver from "../hooks/usePageObserver";
-import { sortOptions, withsSize } from "../shared/Constants";
-import { WithProps } from "../shared/Props";
-import Title from "./Title";
+import mainApi from "../../apis/mainApi";
+import useControlRenderingByClick from "../../hooks/useControlRenderingByClick";
+import usePageObserver from "../../hooks/usePageObserver";
+import { sortOptions, withsSize } from "../../shared/Constants";
+import { WithProps } from "../../shared/Props";
+import Title from "../common/Title";
 import WithCard from "./WithCard";
 
 const Withs = () => {

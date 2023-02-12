@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LiveData } from "../test/data";
 import UploadVideo from "./UploadVideo";
-import SearchSong from "./SearchSong";
+import SearchSong from "./live/SearchSong";
 import { SongProps } from "../shared/Props";
-import Title from "./Title";
+import Title from "./common/Title";
 
 export const EditLiveForm = () => {
   const [title, setTitle] = useState("");

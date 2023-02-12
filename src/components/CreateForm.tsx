@@ -2,11 +2,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { headcounts, genres, ERROR, SUCCESS, HELP } from "../shared/Constants";
 import UploadVideo from "./UploadVideo";
-import SearchSong from "./SearchSong";
+import SearchSong from "./live/SearchSong";
 import { SongProps } from "../shared/Props";
-import Title from "./Title";
+import Title from "./common/Title";
 import mainApi from "../apis/mainApi";
-import Help from "./Help";
+import Help from "./common/Help";
 
 export const CreateWithForm = () => {
   const [title, setTitle] = useState("");

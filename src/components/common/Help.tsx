@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import useControlRenderingByClick from "../hooks/useControlRenderingByClick";
+import useControlRenderingByClick from "../../hooks/useControlRenderingByClick";
 
 interface HelpProps {
   children: React.ReactNode;
