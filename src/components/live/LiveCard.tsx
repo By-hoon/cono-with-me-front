@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LiveCardProps } from "../shared/Props";
+import { LiveCardProps } from "../../shared/Props";
 
 const LiveCard = ({ id, title, thumbnail }: LiveCardProps) => {
   const navigate = useNavigate();

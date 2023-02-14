@@ -11,7 +11,7 @@ import PlayLive from "../routes/PlayLive";
 import SignIn from "../routes/SignIn";
 import SignUp from "../routes/SignUp";
 import WithList from "../routes/WithList";
-import { Header } from "./Header";
+import { Header } from "./common/Header";
 
 const Router = () => {
   const cookies = new Cookies();

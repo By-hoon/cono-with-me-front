@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import { isBrowser } from "react-device-detect";
 import { Link, useLocation } from "react-router-dom";
+import useControlRenderingByClick from "../../hooks/useControlRenderingByClick";
 
 interface DetailHeaderProps {
   title: string;
@@ -9,54 +10,33 @@ interface DetailHeaderProps {
 }
 
 export const Header = () => {
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [showCreateMenu, setShowCreateMenu] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
   const [showBehindSearch, setShowBehindSearch] = useState(false);
   const [currentLocation, setCurrentLocation] = useState("");
+  const {
+    show: showProfileMenu,
+    ref: profileRef,
+    onClickTarget: onClickProfileMenu,
+  } = useControlRenderingByClick();
+  const {
+    show: showCreateMenu,
+    ref: createRef,
+    onClickTarget: onClickCreateMenu,
+  } = useControlRenderingByClick();
+  const { show: showSidebar, ref: sidebarRef, onClickTarget: onClickSidebar } = useControlRenderingByClick();
 
   const location = useLocation();
-
-  const profileRef = useRef<HTMLInputElement>(null);
-  const createRef = useRef<HTMLInputElement>(null);
-  const sidebarRef = useRef<HTMLInputElement>(null);
 
   const onSubmitSearch = () => {
     //검색 로직
   };
-  const onClickProfileMenu = () => {
-    setShowProfileMenu((show) => !show);
-  };
-  const onClickCreateMenu = () => {
-    setShowCreateMenu((show) => !show);
-  };
-  const onClickSidebar = () => {
-    setShowSidebar((show) => !show);
-  };
+
   const appearBehindSearch = () => {
     setShowBehindSearch(true);
   };
   const disappearBehindSearch = () => {
     setShowBehindSearch(false);
   };
-  const onClickOutSide = (e: any) => {
-    if (showProfileMenu && profileRef.current && !profileRef.current.contains(e.target)) {
-      setShowProfileMenu(false);
-    }
-    if (showCreateMenu && createRef.current && !createRef.current.contains(e.target)) {
-      setShowCreateMenu(false);
-    }
-    if (showSidebar && sidebarRef.current && !sidebarRef.current.contains(e.target)) {
-      setShowSidebar(false);
-    }
-  };
 
-  useEffect(() => {
-    document.addEventListener("click", onClickOutSide);
-    return () => {
-      document.removeEventListener("click", onClickOutSide);
-    };
-  });
   useEffect(() => {
     const locationSplit = location.pathname.split("/");
     const locationKeyword = locationSplit.pop() || "home";

@@ -20,22 +20,25 @@ src
 │   ├── mainApi.ts
 │   └── refresh.ts
 ├── components
+│   ├── common
+│   │   ├── Header.tsx
+│   │   ├── Help.tsx
+│   │   └── Title.tsx
+│   ├── live
+│   │   ├── Live.tsx
+│   │   ├── LiveCard.tsx
+│   │   ├── Lives.tsx
+│   │   └── SearchSong.tsx
+│   ├── with
+│   │   ├── WithCard.tsx
+│   │   └── Withs.tsx
 │   ├── CreateForm.tsx
 │   ├── EditForm.tsx
-│   ├── Header.tsx
-│   ├── Help.tsx
-│   ├── Live.tsx
-│   ├── LiveCard.tsx
-│   ├── Lives.tsx
 │   ├── PlayVideo.tsx
 │   ├── Router.tsx
-│   ├── SearchSong.tsx
 │   ├── SignForm.tsx
 │   ├── Song.tsx
-│   ├── Title.tsx
-│   ├── UploadVideo.tsx
-│   ├── WithCard.tsx
-│   └── Withs.tsx
+│   └── UploadVideo.tsx
 ├── routes
 │   ├── CreateLive.tsx
 │   ├── CreateWith.tsx
@@ -50,19 +53,22 @@ src
 │   └── Props.tsx
 ├── styles
 │   ├── components
+│   │   ├── common
+│   │   │   ├── header.scss
+│   │   │   ├── help.scss
+│   │   │   └── title.scss
+│   │   ├── live
+│   │   │   ├── live-card.scss
+│   │   │   ├── live.scss
+│   │   │   ├── lives.scss
+│   │   │   └── search-song.scss
+│   │   ├── with
+│   │   │   ├── with-card.scss
+│   │   │   └── withs.scss
 │   │   ├── create-form.scss
-│   │   ├── header.scss
-│   │   ├── help.scss
-│   │   ├── live-card.scss
-│   │   ├── live.scss
-│   │   ├── lives.scss
 │   │   ├── play-video.scss
-│   │   ├── search-song.scss
 │   │   ├── song.scss
-│   │   ├── title.scss
-│   │   ├── upload-video.scss
-│   │   ├── with-card.scss
-│   │   └── withs.scss
+│   │   └── upload-video.scss
 │   ├── config
 │   │   ├── _colors.scss
 │   │   ├── _fonts.scss

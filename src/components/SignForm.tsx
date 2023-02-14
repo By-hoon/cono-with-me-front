@@ -3,7 +3,7 @@ import moment from "moment";
 import { useCallback, useState } from "react";
 import { Cookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import Title from "./Title";
+import Title from "./common/Title";
 
 export const SignUpForm = () => {
   const [id, setId] = useState("");

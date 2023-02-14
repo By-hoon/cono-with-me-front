@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
-import { LiveProps } from "../shared/Props";
-import { LiveData } from "../test/data";
-import { DetailHeader } from "./Header";
-import PlayVideo from "./PlayVideo";
-import Song from "./Song";
+import { LiveProps } from "../../shared/Props";
+import { LiveData } from "../../test/data";
+import { DetailHeader } from "../common/Header";
+import PlayVideo from "../PlayVideo";
+import Song from "../Song";
 
 const Live = () => {
   const [live, setLive] = useState<LiveProps>();

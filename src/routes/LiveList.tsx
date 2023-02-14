@@ -1,4 +1,4 @@
-import Lives from "../components/Lives";
+import Lives from "../components/live/Lives";
 
 const LiveList = () => {
   return <Lives />;

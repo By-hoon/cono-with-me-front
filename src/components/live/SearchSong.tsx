@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
-import { maniadbBaseUrl, xmlToJson } from "../shared/Constants";
-import { SongProps } from "../shared/Props";
-import Song from "./Song";
+import { maniadbBaseUrl, xmlToJson } from "../../shared/Constants";
+import { SongProps } from "../../shared/Props";
+import Song from "../Song";
 
 export interface SearchSongProps {
   selectedSong: SongProps;
