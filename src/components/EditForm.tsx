@@ -1,10 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LiveData } from "../test/data";
 import UploadVideo from "./UploadVideo";
 import SearchSong from "./live/SearchSong";
 import { SongProps } from "../shared/Props";
 import Title from "./common/Title";
+
+export const EditWithForm = () => {
+  const withId = useLocation().state.withId;
+  return (
+    <div className="edit__container">
+      <div className="edit-with-header__container flex">
+        <Title title={"윗미 수정"} />
+      </div>
+    </div>
+  );
+};
 
 export const EditLiveForm = () => {
   const [title, setTitle] = useState("");

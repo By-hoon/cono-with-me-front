@@ -6,6 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CreateLive from "../routes/CreateLive";
 import CreateWith from "../routes/CreateWith";
 import EditLive from "../routes/EditLive";
+import EditWith from "../routes/EditWith";
 import LiveList from "../routes/LiveList";
 import PlayLive from "../routes/PlayLive";
 import SignIn from "../routes/SignIn";
@@ -52,6 +53,7 @@ const Router = () => {
           <Routes>
             <Route path="/with/create" element={<CreateWith />} />
             <Route path="/with/list" element={<WithList />} />
+            <Route path="/with/edit" element={<EditWith />} />
             <Route path="/live/create" element={<CreateLive />} />
             <Route path="/live/edit" element={<EditLive />} />
             <Route path="/live/list" element={<LiveList />} />
