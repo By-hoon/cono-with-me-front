@@ -8,6 +8,7 @@ import Title from "./common/Title";
 import { ERROR, genres, headcounts, HELP, SUCCESS } from "../shared/Constants";
 import mainApi from "../apis/mainApi";
 import Help from "./common/Help";
+import { isValidTime } from "../utils/Util";
 
 export const EditWithForm = () => {
   const withId = useLocation().state.withId;
@@ -25,8 +26,6 @@ export const EditWithForm = () => {
   const [preferredGenre, setPreferredGenre] = useState("BALLAD");
 
   const navigate = useNavigate();
-  const withTimeFocus = useRef<HTMLInputElement>(null);
-  const expireTimeFocus = useRef<HTMLInputElement>(null);
 
   const changeTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -49,36 +48,10 @@ export const EditWithForm = () => {
   const selectPreferredGenre = (option: string) => {
     setPreferredGenre(option);
   };
-  const convertTime = (time: string) => {
-    const timeSplit = time.split(":");
-    const hour = Number(timeSplit[0]);
-    const minute = Number(timeSplit[1]);
-    return hour * 60 + minute;
-  };
-  const isValidTime = () => {
-    const currentTime = new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-      .toISOString()
-      .slice(11, 16);
-    const convertCurrentTime = convertTime(currentTime);
-    const convertWithTime = convertTime(withTime);
-    const convertExpireTime = convertTime(expireTime);
-    if (convertCurrentTime >= convertWithTime) {
-      withTimeFocus.current?.focus();
-      alert(`${ERROR.CREATE.EARLYWITHTIME} ${currentTime}`);
-      return false;
-    } else if (convertWithTime <= convertExpireTime) {
-      expireTimeFocus.current?.focus();
-      alert(`${ERROR.CREATE.LATEEXPIRETIME}`);
-      return false;
-    } else if (convertCurrentTime >= convertExpireTime) {
-      expireTimeFocus.current?.focus();
-      alert(`${ERROR.CREATE.EARLYEXPIRETIME}`);
-      return false;
-    } else return true;
-  };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isValidTime()) {
+    if (isValidTime(withTime, expireTime)) {
       const today = new Date();
       const year = today.getFullYear();
       const month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -141,7 +114,6 @@ export const EditWithForm = () => {
               value={withTime}
               onChange={changeWithTime}
               required
-              ref={withTimeFocus}
               onClick={(e) => {
                 e.currentTarget.showPicker();
               }}
@@ -157,7 +129,6 @@ export const EditWithForm = () => {
               value={expireTime}
               onChange={changeExpireTime}
               required
-              ref={expireTimeFocus}
               onClick={(e) => {
                 e.currentTarget.showPicker();
               }}
