@@ -1,4 +1,5 @@
-import { ERROR } from "../shared/Constants";
+import mainApi from "../apis/mainApi";
+import { ERROR, SUCCESS } from "../shared/Constants";
 
 const convertTime = (time: string) => {
   const timeSplit = time.split(":");
@@ -24,4 +25,15 @@ export const isValidTime = (withTime: string, expireTime: string) => {
     alert(`${ERROR.CREATE.EARLYEXPIRETIME}`);
     return false;
   } else return true;
+};
+
+export const deleteWith = (withId: string) => {
+  mainApi
+    .delete(`/recruitments/${withId}`, {})
+    .then((res) => {
+      alert(SUCCESS.DELETEWITH);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };

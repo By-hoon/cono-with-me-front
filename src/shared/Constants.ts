@@ -32,6 +32,7 @@ export const HELP = {
 export const SUCCESS = {
   CREATEWITH: "윗미가 생성되었습니다.",
   EDITWITH: "윗미가 수정되었습니다.",
+  DELETEWITH: "윗미가 삭제되었습니다.",
 };
 
 export const ERROR = {
