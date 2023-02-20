@@ -18,13 +18,16 @@ export const isValidTime = (withTime: string, expireTime: string) => {
   if (convertCurrentTime >= convertWithTime) {
     alert(`${ERROR.CREATE.EARLYWITHTIME} ${currentTime}`);
     return false;
-  } else if (convertWithTime <= convertExpireTime) {
+  }
+  if (convertWithTime <= convertExpireTime) {
     alert(`${ERROR.CREATE.LATEEXPIRETIME}`);
     return false;
-  } else if (convertCurrentTime >= convertExpireTime) {
+  }
+  if (convertCurrentTime >= convertExpireTime) {
     alert(`${ERROR.CREATE.EARLYEXPIRETIME}`);
     return false;
-  } else return true;
+  }
+  return true;
 };
 
 export const deleteWith = (withId: string) => {
