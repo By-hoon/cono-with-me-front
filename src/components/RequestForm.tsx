@@ -1,15 +1,13 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import mainApi from "../apis/mainApi";
 import { SUCCESS } from "../shared/Constants";
 import Title from "./common/Title";
 
-interface RequestFormProps {
-  withId: string;
-}
-
-const RequestForm = ({ withId }: RequestFormProps) => {
+const RequestForm = () => {
   const [comment, setComment] = useState("");
+  console.log(useLocation().state);
+  const withId = useLocation().state.withId as string;
 
   const navigate = useNavigate();
 
