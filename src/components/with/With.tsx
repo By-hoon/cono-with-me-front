@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import mainApi from "../../apis/mainApi";
 import { WithProps } from "../../shared/Props";
 
 const With = () => {
   const [w, setW] = useState<WithProps>();
 
-  const withId = useLocation().state.withId;
+  const withId = useLocation().state.withId as string;
+  const navigate = useNavigate();
+
+  const openRequestForm = () => {};
 
   useEffect(() => {
     mainApi
@@ -38,6 +41,24 @@ const With = () => {
       </div>
       <div className="with-content__container">
         <div className="with-content">{w?.content}</div>
+      </div>
+      <div className="with-request__container">
+        <button
+          className="with-request__button"
+          onClick={() => {
+            navigate("/with/request", { state: { withId: withId } });
+          }}
+        >
+          신청
+        </button>
+        <button
+          className="with-cancle__button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          취소
+        </button>
       </div>
     </div>
   );

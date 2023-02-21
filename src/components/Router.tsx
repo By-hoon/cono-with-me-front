@@ -9,6 +9,7 @@ import EditLive from "../routes/EditLive";
 import EditWith from "../routes/EditWith";
 import LiveList from "../routes/LiveList";
 import PlayLive from "../routes/PlayLive";
+import RequestWith from "../routes/RequestWith";
 import SignIn from "../routes/SignIn";
 import SignUp from "../routes/SignUp";
 import WithDetail from "../routes/WithDetail";
@@ -56,6 +57,7 @@ const Router = () => {
             <Route path="/with/list" element={<WithList />} />
             <Route path="/with/edit" element={<EditWith />} />
             <Route path="/with/detail" element={<WithDetail />} />
+            <Route path="/with/request" element={<RequestWith />} />
             <Route path="/live/create" element={<CreateLive />} />
             <Route path="/live/edit" element={<EditLive />} />
             <Route path="/live/list" element={<LiveList />} />
