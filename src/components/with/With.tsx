@@ -9,8 +9,6 @@ const With = () => {
   const withId = useLocation().state.withId as string;
   const navigate = useNavigate();
 
-  const openRequestForm = () => {};
-
   useEffect(() => {
     mainApi
       .get(`/recruitments/${withId}`, {})
