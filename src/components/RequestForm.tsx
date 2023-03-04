@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import { useCallback, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import mainApi from "../apis/mainApi";
@@ -6,7 +7,6 @@ import Title from "./common/Title";
 
 const RequestForm = () => {
   const [comment, setComment] = useState("");
-  console.log(useLocation().state);
   const withId = useLocation().state.withId as string;
 
   const navigate = useNavigate();
@@ -33,6 +33,14 @@ const RequestForm = () => {
     <div className="request-form__container">
       <div className="request-with-header__container flex">
         <Title title={"윗미 신청"} />
+        <div
+          className="request-cancel-button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          <Icon icon="mdi:cancel-bold" />
+        </div>
       </div>
       <form onSubmit={onSubmit}>
         <div className="comment-input__container">
