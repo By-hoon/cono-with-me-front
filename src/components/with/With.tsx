@@ -50,7 +50,7 @@ const With = () => {
           신청
         </button>
         <button
-          className="with-cancle__button"
+          className="with-cancel__button"
           onClick={() => {
             navigate(-1);
           }}

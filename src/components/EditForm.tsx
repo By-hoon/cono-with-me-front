@@ -295,7 +295,7 @@ export const EditLiveForm = () => {
         </div>
       </div>
       <div className="button__container">
-        <button className="cancle__button" onClick={goPreviousPage}>
+        <button className="cancel__button" onClick={goPreviousPage}>
           취소
         </button>
         <button className="submit__button" onClick={editLive}>
