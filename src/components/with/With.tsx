@@ -9,6 +9,18 @@ const With = () => {
   const withId = useLocation().state.withId as string;
   const navigate = useNavigate();
 
+  const formattingTime = (time: string) => {
+    const timeSplit = time.split("T");
+    const targetDate = timeSplit[0].split("-");
+    const targetTime = timeSplit[1].split(":").map((string) => Number(string));
+    const year = targetDate[0].split("").slice(2, 4).join("");
+    const month = targetDate[1];
+    const date = targetDate[2];
+    const hour = targetTime[0] > 12 ? `오후 ${targetTime[0] - 12}` : `오전 ${targetTime[0]}`;
+    const minute = targetTime[1];
+    return `${year}년 ${month}월 ${date}일 ${hour}시 ${minute}분`;
+  };
+
   useEffect(() => {
     mainApi
       .get(`/recruitments/${withId}`, {})
@@ -26,7 +38,7 @@ const With = () => {
         <div className="with-title">{w?.title}</div>
       </div>
       <div className="with-time__container">
-        <div className="with-start-time">{w?.startedAt}</div>
+        <div className="with-start-time">{w ? formattingTime(w.startedAt) : null}</div>
       </div>
       <div className="with-place__container">
         <div className="with-place">{w?.place}</div>
