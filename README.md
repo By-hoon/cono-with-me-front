@@ -23,6 +23,7 @@ src
 │   ├── common
 │   │   ├── Header.tsx
 │   │   ├── Help.tsx
+│   │   ├── Loading.tsx
 │   │   └── Title.tsx
 │   ├── live
 │   │   ├── Live.tsx
@@ -30,23 +31,31 @@ src
 │   │   ├── Lives.tsx
 │   │   └── SearchSong.tsx
 │   ├── with
+│   │   ├── With.tsx
 │   │   ├── WithCard.tsx
 │   │   └── Withs.tsx
 │   ├── CreateForm.tsx
 │   ├── EditForm.tsx
 │   ├── PlayVideo.tsx
+│   ├── RequestForm.tsx
 │   ├── Router.tsx
 │   ├── SignForm.tsx
 │   ├── Song.tsx
 │   └── UploadVideo.tsx
+├── hooks
+│   ├── useControlRenderingByClick.tsx
+│   └── usePageObserver.tsx
 ├── routes
 │   ├── CreateLive.tsx
 │   ├── CreateWith.tsx
 │   ├── EditLive.tsx
+│   ├── EditWith.tsx
 │   ├── LiveList.tsx
 │   ├── PlayLive.tsx
+│   ├── RequestWith.tsx
 │   ├── SignIn.tsx
 │   ├── SignUp.tsx
+│   ├── WithDetail.tsx
 │   └── WithList.tsx
 ├── shared
 │   ├── Constants.tsx
@@ -66,6 +75,7 @@ src
 │   │   │   ├── with-card.scss
 │   │   │   └── withs.scss
 │   │   ├── create-form.scss
+│   │   ├── edit-form.scss
 │   │   ├── play-video.scss
 │   │   ├── song.scss
 │   │   └── upload-video.scss
@@ -76,6 +86,8 @@ src
 │   └── styles.scss
 ├── test
 │   └── data.ts
+├── utils
+│   └── Util.ts
 ├── App.tsx
 ├── index.tsx
 ├── react-app-env.d.ts
