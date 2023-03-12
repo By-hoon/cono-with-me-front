@@ -33,6 +33,7 @@ export const SUCCESS = {
   CREATEWITH: "윗미가 생성되었습니다.",
   EDITWITH: "윗미가 수정되었습니다.",
   DELETEWITH: "윗미가 삭제되었습니다.",
+  REQUESTWITH: "윗미 신청이 완료되었습니다.",
 };
 
 export const ERROR = {

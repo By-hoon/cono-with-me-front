@@ -183,7 +183,7 @@ export const Header = () => {
                         />
                       </form>
                     </div>
-                    <div className="header-search-cancle__container flex">
+                    <div className="header-search-cancel__container flex">
                       <span onClick={disappearBehindSearch}>취소</span>
                     </div>
                   </div>
