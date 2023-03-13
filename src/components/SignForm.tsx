@@ -2,6 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useCallback, useState } from "react";
 import { Cookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Title from "./common/Title";
 
@@ -141,46 +142,41 @@ export const SignInForm = ({ setIsSignIn }: SignInProps) => {
 
   return (
     <div className="sign-in-form__container">
-      <Title title={"로그인"} />
+      <div className="sign-in-header__container flex">
+        <Title title={"로그인"} />
+      </div>
       <form onSubmit={login}>
         <div className="id-input__container">
-          <div className="flex">
-            <div className="input-title__container">아이디(이메일)</div>
-            <input
-              type="text"
-              value={id}
-              placeholder="아이디를 입력해 주세요."
-              onChange={changeId}
-              required
-            />
-          </div>
+          <div className="input-title">아이디(이메일)</div>
+          <input
+            className="id__input"
+            type="text"
+            value={id}
+            placeholder="아이디를 입력해 주세요."
+            onChange={changeId}
+            required
+          />
         </div>
         <div className="password-input__container">
-          <div className="flex">
-            <div className="input-title__container">비밀번호</div>
-            <input
-              type="password"
-              value={password}
-              placeholder="비밀번호를 입력해 주세요."
-              onChange={changePassword}
-              required
-            />
-          </div>
+          <div className="input-title">비밀번호</div>
+          <input
+            className="password__input"
+            type="password"
+            value={password}
+            placeholder="비밀번호를 입력해 주세요."
+            onChange={changePassword}
+            required
+          />
         </div>
         <div className="submit__container">
           <input type="submit" value="로그인" />
+          <div className="sign-buttons__container">
+            <Link to={"/signup"} className="move-sign-up__link">
+              아직 회원이 아닌 경우 →
+            </Link>
+          </div>
         </div>
       </form>
-      <div className="sign-buttons__container">
-        <button
-          className="sign__button"
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          회원가입
-        </button>
-      </div>
     </div>
   );
 };
