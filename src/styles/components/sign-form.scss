@@ -1,4 +1,4 @@
-.sign-in-form__container{
+.sign-up-form__container, .sign-in-form__container{
     max-width: 425px;
     min-width: 320px;
     margin: 0 auto;
@@ -9,16 +9,16 @@
     }
 }
 
-.sign-in-header__container{
+.sign-up-header__container, .sign-in-header__container{
     @extend .lives-header__container;
 }
 
-.id-input__container, .password-input__container{
+.id-input__container, .password-input__container, .name-input__container, .nickname-input__container{
 margin-bottom: 20px;
 padding: 0 10px;
 }
 
-.id__input, .password__input{
+.id__input, .password__input, .name__input, .nickname__input{
 width: 100%;
 margin: 5px 0;
 padding: 10px 0 15px 0;
