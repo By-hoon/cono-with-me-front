@@ -6,6 +6,7 @@
 //components
 @import "./components/common/header.scss";
 @import "./components/common/help.scss";
+@import "./components/common/loading.scss";
 @import "./components/common/title.scss";
 
 @import "./components/live/live-card.scss";
@@ -14,11 +15,14 @@
 @import "./components/live/search-song.scss";
 
 @import "./components/with/with-card.scss";
+@import "./components/with/with.scss";
 @import "./components/with/withs.scss";
 
 @import "./components/create-form.scss";
 @import "./components/edit-form.scss";
 @import "./components/play-video.scss";
+@import "./components/request-form.scss";
+@import "./components/sign-form.scss";
 @import "./components/song.scss";
 @import "./components/upload-video.scss";
 

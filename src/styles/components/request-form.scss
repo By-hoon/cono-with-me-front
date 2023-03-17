@@ -1,0 +1,22 @@
+.request-form__container {
+  max-width: 425px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.request-with-header__container {
+  @extend .lives-header__container;
+}
+
+.comment-input__container {
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+.comment__input {
+  width: 100%;
+  padding: 5px 0;
+  outline: 0;
+  border-bottom: 1px solid $shadow-color;
+  resize: none;
+}

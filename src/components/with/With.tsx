@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -54,10 +55,12 @@ const With = () => {
             <div className="with-start-time">{formattingTime("fullTime", w.startedAt)}</div>
           </div>
           <div className="with-place__container">
-            <div className="with-place">{w.place}</div>
+            <div className="with-place">
+              <Icon icon="ic:baseline-place" /> {w.place}
+            </div>
           </div>
           <div className="with-participant__container">
-            <div className="with-participant">{w.participant}</div>
+            <div className="with-participant">모집 인원 {w.participant}명</div>
           </div>
           <div className="with-genre__container">
             <div className="with-genre">{w.genre}</div>
@@ -66,7 +69,9 @@ const With = () => {
             <div className="with-content">{w.content}</div>
           </div>
           <div className="remain-time__container">
-            <div className="with-start-time">마감 {formattingTime("remainTime", w.expiredAt)}전</div>
+            <div className="with-remain-time">
+              마감 <span>{formattingTime("remainTime", w.expiredAt)}</span> 전
+            </div>
           </div>
           <div className="with-request__container">
             <button
